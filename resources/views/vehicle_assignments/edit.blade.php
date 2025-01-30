@@ -14,7 +14,8 @@
     <div class="container-fluid">
         <h1 class="h3 mb-4 text-gray-800">Edit Vehicle Assignment</h1>
 
-        <form action="{{ route('vehicle-assignments.update', $vehicleAssignment->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('vehicle-assignments.update', $vehicleAssignment->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -23,7 +24,7 @@
             <div class="form-group">
                 <label for="date">Date</label>
                 <input type="date" name="date" id="date" class="form-control"
-                       value="{{ old('date', $vehicleAssignment->date) }}" required>
+                    value="{{ old('date', $vehicleAssignment->date) }}" required>
                 @error('date')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -34,7 +35,8 @@
                 <select name="customer_id" id="customer_id" class="form-control" required>
                     <option value="">Select Customer</option>
                     @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}" {{ old('customer_id', $vehicleAssignment->customer_id) == $customer->id ? 'selected' : '' }}>
+                        <option value="{{ $customer->id }}"
+                            {{ old('customer_id', $vehicleAssignment->customer_id) == $customer->id ? 'selected' : '' }}>
                             {{ $customer->name }}
                         </option>
                     @endforeach
@@ -49,7 +51,8 @@
                 <select name="vendor_id" id="vendor_id" class="form-control" required>
                     <option value="">Select Vendor</option>
                     @foreach ($vendors as $vendor)
-                        <option value="{{ $vendor->id }}" {{ old('vendor_id', $vehicleAssignment->vendor_id) == $vendor->id ? 'selected' : '' }}>
+                        <option value="{{ $vendor->id }}"
+                            {{ old('vendor_id', $vehicleAssignment->vendor_id) == $vendor->id ? 'selected' : '' }}>
                             {{ $vendor->name }}
                         </option>
                     @endforeach
@@ -62,7 +65,7 @@
             <div class="form-group">
                 <label for="kanta_weight">Kanta Weight</label>
                 <input type="number" name="kanta_weight" id="kanta_weight" class="form-control"
-                       value="{{ old('kanta_weight', $vehicleAssignment->kanta_weight) }}" step="0.01" required>
+                    value="{{ old('kanta_weight', $vehicleAssignment->kanta_weight) }}" step="0.01" required>
                 @error('kanta_weight')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -71,7 +74,7 @@
             <div class="form-group">
                 <label for="rate">Rate</label>
                 <input type="number" name="rate" id="rate" class="form-control"
-                       value="{{ old('rate', $vehicleAssignment->rate) }}" step="0.01" required>
+                    value="{{ old('rate', $vehicleAssignment->rate) }}" step="0.01" required>
                 @error('rate')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -80,7 +83,7 @@
             <div class="form-group">
                 <label for="total">Total</label>
                 <input type="number" name="total" id="total" class="form-control"
-                       value="{{ old('total', $vehicleAssignment->total) }}" step="0.01" required>
+                    value="{{ old('total', $vehicleAssignment->total) }}" step="0.01" required>
                 @error('total')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -91,7 +94,8 @@
                 <select name="vehicle_id" id="vehicle_id" class="form-control" required>
                     <option value="">Select Vehicle</option>
                     @foreach ($vehicles as $vehicle)
-                        <option value="{{ $vehicle->id }}" {{ old('vehicle_id', $vehicleAssignment->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
+                        <option value="{{ $vehicle->id }}"
+                            {{ old('vehicle_id', $vehicleAssignment->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
                             {{ $vehicle->vehicle_number }}
                         </option>
                     @endforeach
@@ -113,7 +117,8 @@
                 <label for="photo">Upload Photo</label>
                 @if (isset($vehicleAssignment->photo) && $vehicleAssignment->photo)
                     <div class="mb-2">
-                        <img src="{{ asset('storage/photos/vehicle_assignments/' . $vehicleAssignment->photo) }}" alt="Current Photo" width="100">
+                        <img src="{{ asset('storage/photos/vehicle_assignments/' . $vehicleAssignment->photo) }}"
+                            alt="Current Photo" width="100">
                     </div>
                 @endif
                 <input type="file" name="photo" id="photo" class="form-control">
@@ -127,4 +132,22 @@
             <a href="{{ route('rawanas.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const kantaWeightField = document.getElementById('kanta_weight');
+            const rateField = document.getElementById('rate');
+            const totalField = document.getElementById('total');
+
+            function calculateTotal() {
+                const kantaWeight = parseFloat(kantaWeightField.value) || 0;
+                const rate = parseFloat(rateField.value) || 0;
+                const total = kantaWeight * rate;
+                totalField.value = total.toFixed(2);
+            }
+
+            kantaWeightField.addEventListener('input', calculateTotal);
+            rateField.addEventListener('input', calculateTotal);
+        });
+    </script>
 @endsection

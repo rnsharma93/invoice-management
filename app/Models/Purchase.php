@@ -11,8 +11,6 @@ class Purchase extends Model
     protected $fillable = [
         'rawana_id',
         'date',
-        'amount',
-        'grade',
         'rawana_weight',
         'kanta_weight',
         'rate',

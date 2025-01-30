@@ -25,7 +25,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>Rawana No</th>
+                                <th>E-Way No</th>
                                 <th>Vehicle Number</th>
                                 <th>Customer</th>
                                 <th>Vendor</th>
@@ -41,7 +41,7 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ \Carbon\Carbon::parse($assignment->date)->format('d-m-Y') }}</td>
-                                    <td>{{ $assignment->rawana->rawana_no ?? 'N/A' }}</td>
+                                    <td>{{ $assignment->rawana->eway_bill_no ?? 'N/A' }}</td>
                                     <td>{{ $assignment->vehicle->vehicle_number ?? 'N/A' }}</td>
                                     <td>{{ $assignment->rawana->customer->name ?? 'N/A' }}</td>
                                     <td>{{ $assignment->rawana->vendor->name ?? 'N/A' }}</td>

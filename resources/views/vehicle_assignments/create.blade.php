@@ -129,4 +129,22 @@
             <a href="{{ route('rawanas.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const kantaWeightField = document.getElementById('kanta_weight');
+            const rateField = document.getElementById('rate');
+            const totalField = document.getElementById('total');
+
+            function calculateTotal() {
+                const kantaWeight = parseFloat(kantaWeightField.value) || 0;
+                const rate = parseFloat(rateField.value) || 0;
+                const total = kantaWeight * rate;
+                totalField.value = total.toFixed(2);
+            }
+
+            kantaWeightField.addEventListener('input', calculateTotal);
+            rateField.addEventListener('input', calculateTotal);
+        });
+    </script>
 @endsection

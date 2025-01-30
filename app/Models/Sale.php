@@ -18,6 +18,10 @@ class Sale extends Model
         'rate',
         'total',
         'vehicle_id',
+        'reverse_charges',
+        'transport_name',
+        'date_of_supply',
+        'place_of_supply',
         'remark',
         'photo',
     ];

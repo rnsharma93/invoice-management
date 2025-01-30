@@ -33,26 +33,8 @@
             </div>
 
             <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="number" name="amount" id="amount" class="form-control"
-                       value="{{ old('amount', $purchase->amount) }}" step="0.01" required>
-                @error('amount')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="grade">Grade</label>
-                <input type="text" name="grade" id="grade" class="form-control"
-                       value="{{ old('grade', $purchase->grade) }}">
-                @error('grade')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
                 <label for="rawana_weight">Rawana Weight</label>
-                <input type="number" name="rawana_weight" id="rawana_weight" class="form-control"
+                <input type="hidden" name="rawana_weight" id="rawana_weight" class="form-control"
                        value="{{ old('rawana_weight', $purchase->rawana_weight) }}" step="0.01" required>
                 @error('rawana_weight')
                     <div class="text-danger">{{ $message }}</div>
@@ -126,4 +108,22 @@
             <a href="{{ route('purchases.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const kantaWeightField = document.getElementById('kanta_weight');
+        const rateField = document.getElementById('rate');
+        const totalField = document.getElementById('total');
+
+        function calculateTotal() {
+            const kantaWeight = parseFloat(kantaWeightField.value) || 0;
+            const rate = parseFloat(rateField.value) || 0;
+            const total = kantaWeight * rate;
+            totalField.value = total.toFixed(2);
+        }
+
+        kantaWeightField.addEventListener('input', calculateTotal);
+        rateField.addEventListener('input', calculateTotal);
+    });
+    </script>
 @endsection

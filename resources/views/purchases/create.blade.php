@@ -27,27 +27,8 @@
             </div>
 
             <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="number" name="amount" id="amount" class="form-control"
-                       value="{{ old('amount') }}" step="0.01" required>
-                @error('amount')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="grade">Grade</label>
-                <input type="text" name="grade" id="grade" class="form-control"
-                       value="{{ old('grade') }}" required>
-                @error('grade')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
                 <label for="rawana_weight">Rawana Weight</label>
-                <input type="number" name="rawana_weight" id="rawana_weight" class="form-control"
-                       value="{{ old('rawana_weight') }}" step="0.01" required>
+                <input type="hidden" name="rawana_weight" id="rawana_weight" class="form-control" value="{{ old('rawana_weight', $rawana->rawana_weight) }}" step="0.01" required>
                 @error('rawana_weight')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -55,8 +36,7 @@
 
             <div class="form-group">
                 <label for="kanta_weight">Kanta Weight</label>
-                <input type="number" name="kanta_weight" id="kanta_weight" class="form-control"
-                       value="{{ old('kanta_weight') }}" step="0.01" required>
+                <input type="number" name="kanta_weight" id="kanta_weight" class="form-control" value="{{ old('kanta_weight', $rawana->kanta_weight) }}" step="0.01" required>
                 @error('kanta_weight')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -85,7 +65,7 @@
                 <select name="vehicle_id" id="vehicle_id" class="form-control" required>
                     <option value="">Select Vehicle</option>
                     @foreach ($vehicles as $vehicle)
-                        <option value="{{ $vehicle->id }}" {{ old('vehicle_id') == $vehicle->id ? 'selected' : '' }}>
+                        <option value="{{ $vehicle->id }}" {{ old('vehicle_id', $rawana->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
                             {{ $vehicle->vehicle_number }}
                         </option>
                     @endforeach
@@ -115,4 +95,23 @@
             <a href="{{ route('rawanas.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const kantaWeightInput = document.getElementById('kanta_weight');
+            const rateInput = document.getElementById('rate');
+            const totalInput = document.getElementById('total');
+
+            function calculateTotal() {
+                const kantaWeight = parseFloat(kantaWeightInput.value) || 0;
+                const rate = parseFloat(rateInput.value) || 0;
+
+                const total = kantaWeight * rate;
+                totalInput.value = total.toFixed(2);
+            }
+
+            kantaWeightInput.addEventListener('input', calculateTotal);
+            rateInput.addEventListener('input', calculateTotal);
+        });
+    </script>
 @endsection

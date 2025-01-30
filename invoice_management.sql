@@ -241,7 +241,7 @@ DROP TABLE IF EXISTS `rawanas`;
 CREATE TABLE IF NOT EXISTS `rawanas` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
-  `rawana_no` varchar(255) NOT NULL,
+  `eway_bill_no` varchar(255) NOT NULL,
   `vendor_id` bigint UNSIGNED NOT NULL,
   `customer_id` bigint UNSIGNED NOT NULL,
   `vehicle_id` bigint UNSIGNED NOT NULL,
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `rawanas` (
 -- Dumping data for table `rawanas`
 --
 
-INSERT INTO `rawanas` (`id`, `date`, `rawana_no`, `vendor_id`, `customer_id`, `vehicle_id`, `rawana_weight`, `kanta_weight`, `created_at`, `updated_at`) VALUES
+INSERT INTO `rawanas` (`id`, `date`, `eway_bill_no`, `vendor_id`, `customer_id`, `vehicle_id`, `rawana_weight`, `kanta_weight`, `created_at`, `updated_at`) VALUES
 (11, '2025-01-24', '100', 2, 36, 5, '10000.00', '12000.00', '2025-01-24 09:37:08', '2025-01-24 09:37:08');
 
 -- --------------------------------------------------------

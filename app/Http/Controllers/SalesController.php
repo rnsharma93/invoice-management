@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Vendor;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 
 class SalesController extends Controller
@@ -35,11 +36,15 @@ class SalesController extends Controller
             'date' => 'required|date',
             'customer_id' => 'required|exists:customers,id',
             'vendor_id' => 'required|exists:vendors,id',
-            'rawan_weight' => 'required|numeric|min:0',
+            'rawana_weight' => 'required|numeric|min:0',
             'kanta_weight' => 'required|numeric|min:0',
             'rate' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
             'vehicle_id' => 'required|exists:vehicles,id',
+            'reverse_charges' => 'nullable|string|max:1',
+            'transport_name' => 'nullable|string|max:255',
+            'date_of_supply' => 'nullable|date',
+            'place_of_supply' => 'nullable|string|max:255',
             'remark' => 'nullable|string|max:1000',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -57,11 +62,15 @@ class SalesController extends Controller
             'date' => $request->input('date'),
             'customer_id' => $request->input('customer_id'),
             'vendor_id' => $request->input('vendor_id'),
-            'rawan_weight' => $request->input('rawan_weight'),
+            'rawana_weight' => $request->input('rawana_weight'),
             'kanta_weight' => $request->input('kanta_weight'),
             'rate' => $request->input('rate'),
             'total' => $request->input('total'),
             'vehicle_id' => $request->input('vehicle_id'),
+            'reverse_charges' => $request->input('reverse_charges'),
+            'transport_name' => $request->input('transport_name'),
+            'date_of_supply' => $request->input('date_of_supply'),
+            'place_of_supply' => $request->input('place_of_supply'),
             'remark' => $request->input('remark'),
             'photo' => $photoName,
         ]);
@@ -89,6 +98,10 @@ class SalesController extends Controller
             'rate' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
             'vehicle_id' => 'required|exists:vehicles,id',
+            'reverse_charges' => 'nullable|string|max:1',
+            'transport_name' => 'nullable|string|max:255',
+            'date_of_supply' => 'required|date',
+            'place_of_supply' => 'nullable|string|max:255',
             'remark' => 'nullable|string|max:1000',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -103,6 +116,10 @@ class SalesController extends Controller
         $sale->rate = $request->rate;
         $sale->total = $request->total;
         $sale->vehicle_id = $request->vehicle_id;
+        $sale->reverse_charges = $request->reverse_charges;
+        $sale->transport_name = $request->transport_name;
+        $sale->date_of_supply = $request->date_of_supply;
+        $sale->place_of_supply = $request->place_of_supply;
         $sale->remark = $request->remark;
 
         if ($request->hasFile('photo')) {
@@ -138,4 +155,24 @@ class SalesController extends Controller
         $sale = Sale::findOrFail($id);
         return view('sales.show', compact('sale'));
     }
+
+    public function createInvoice($id)
+    {
+        $sale = Sale::with([
+            'rawana.rawanaItems',
+            'customer',
+            'vendor',
+            'vehicle'
+        ])->findOrFail($id);
+
+        // dd($sale->rawana);
+
+
+        $customers = Customer::all();
+        $vendors = Vendor::all();
+        $vehicles = Vehicle::all();
+
+        return view('sales.invoice', compact('sale', 'customers', 'vendors', 'vehicles'));
+    }
+
 }

@@ -22,6 +22,10 @@ return new class extends Migration
             $table->decimal('rate', 10, 2);
             $table->decimal('total', 10, 2);
             $table->unsignedBigInteger('vehicle_id');
+            $table->enum('reverse_charges', ['Y', 'N'])->nullable();
+            $table->string('transport_name')->nullable();
+            $table->date('date_of_supply');
+            $table->string('place_of_supply')->nullable();
             $table->string('remark')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();

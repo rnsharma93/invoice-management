@@ -25,12 +25,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>Rawana No</th>
+                                <th>E-Way No</th>
                                 <th>Vehicle</th>
                                 <th>Vendor</th>
-                                <th>Grade</th>
-                                <th>Weight Rawana</th>
-                                <th>Weight Kanta</th>
+                                <th class="d-none">Rawana Weight</th>
+                                <th>Kanta Weight</th>
                                 <th>Rate</th>
                                 <th>Total</th>
                                 <th>Action</th>
@@ -41,11 +40,10 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ \Carbon\Carbon::parse($purchase->date)->format('d-m-Y') }}</td>
-                                    <td>{{ $purchase->rawana->rawana_no ?? 'N/A' }}</td>
+                                    <td>{{ $purchase->rawana->eway_bill_no ?? 'N/A' }}</td>
                                     <td>{{ $purchase->vehicle->vehicle_number ?? 'N/A' }}</td>
                                     <td>{{ $purchase->rawana->vendor->name ?? 'N/A' }}</td>
-                                    <td>{{ $purchase->grade }}</td>
-                                    <td>{{ $purchase->rawana_weight }}</td>
+                                    <td class="d-none">{{ $purchase->rawana_weight }}</td>
                                     <td>{{ $purchase->kanta_weight }}</td>
                                     <td>{{ number_format($purchase->rate, 2) }}</td>
                                     <td>{{ number_format($purchase->total, 2) }}</td>

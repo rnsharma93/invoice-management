@@ -28,8 +28,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>Rawana No</th>
+                                <th>E-Way No</th>
                                 <th>Vehicle</th>
+                                <th>Vehicle Rate</th>
                                 <th>Vendor(Purchase Party)</th>
                                 <th>Customer(Sale Party)</th>
                                 <th>Weight Rawana</th>
@@ -43,8 +44,9 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ \Carbon\Carbon::parse($rawana->date)->format('d-m-Y') }}</td>
-                                    <td>{{ $rawana->rawana_no }}</td>
+                                    <td>{{ $rawana->eway_bill_no }}</td>
                                     <td>{{ $rawana->vehicle->vehicle_number ?? 'N/A' }}</td>
+                                    <td>{{ $rawana->vehicle_rate }}</td>
                                     <td>{{ $rawana->vendor->name ?? 'N/A' }}</td>
                                     <td>{{ $rawana->customer->name ?? 'N/A' }}</td>
                                     <td>{{ $rawana->rawana_weight }}</td>
@@ -53,9 +55,9 @@
                                         <a href="{{ route('purchases.create', ['rawana_id' => $rawana->id]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Create Purchase">
                                             <i class="fas fa-shopping-cart"></i>
                                         </a>
-                                        <a href="{{ route('vehicle-assignments.create', ['rawana_id' => $rawana->id]) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Assign Vehicle">
+                                        {{-- <a href="{{ route('vehicle-assignments.create', ['rawana_id' => $rawana->id]) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Assign Vehicle">
                                             <i class="fas fa-truck"></i>
-                                        </a>
+                                        </a> --}}
                                         <a href="{{ route('sales.create', ['rawana_id' => $rawana->id]) }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Create Sale">
                                             <i class="fas fa-file-invoice-dollar"></i>
                                         </a>

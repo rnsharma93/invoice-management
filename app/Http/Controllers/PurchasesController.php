@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Purchase;
 use App\Models\Rawana;
+use App\Models\Customer;
+use App\Models\Vendor;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +22,8 @@ class PurchasesController extends Controller
     {
         $rawana_id = $request->query('rawana_id');
         $rawana = Rawana::find($rawana_id);
+        $customers = Customer::all();
+        $vendors = Vendor::all();
         $vehicles = Vehicle::all();
         return view('purchases.create', compact('rawana', 'vehicles'));
     }
@@ -29,8 +33,6 @@ class PurchasesController extends Controller
         $request->validate([
             'rawana_id' => 'required|exists:rawanas,id',
             'date' => 'required|date',
-            'amount' => 'required|numeric|min:0',
-            'grade' => 'nullable|string|max:255',
             'rawana_weight' => 'required|numeric|min:0',
             'kanta_weight' => 'required|numeric|min:0',
             'rate' => 'required|numeric|min:0',
@@ -51,8 +53,6 @@ class PurchasesController extends Controller
         Purchase::create([
             'rawana_id' => $request->input('rawana_id'),
             'date' => $request->input('date'),
-            'amount' => $request->input('amount'),
-            'grade' => $request->input('grade'),
             'rawana_weight' => $request->input('rawana_weight'),
             'kanta_weight' => $request->input('kanta_weight'),
             'rate' => $request->input('rate'),
@@ -76,8 +76,6 @@ class PurchasesController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'amount' => 'required|numeric',
-            'grade' => 'nullable|string',
             'rawana_weight' => 'required|numeric',
             'kanta_weight' => 'required|numeric',
             'rate' => 'required|numeric',
@@ -90,8 +88,6 @@ class PurchasesController extends Controller
         $purchase = Purchase::findOrFail($id);
 
         $purchase->date = $request->date;
-        $purchase->amount = $request->amount;
-        $purchase->grade = $request->grade;
         $purchase->rawana_weight = $request->rawana_weight;
         $purchase->kanta_weight = $request->kanta_weight;
         $purchase->rate = $request->rate;

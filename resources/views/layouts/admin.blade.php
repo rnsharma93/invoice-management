@@ -104,19 +104,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseVehicleAssignment"
-                    aria-expanded="true" aria-controls="collapseVehicleAssignment">
-                    <i class="fas fa-fw fa-truck"></i>
-                    <span>Vehicle Assignments</span>
-                </a>
-                <div id="collapseVehicleAssignment" class="collapse" aria-labelledby="headingVehicleAssignment" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('vehicle-assignments.index') }}">List Vehicle Assignments</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProducts"
                     aria-expanded="true" aria-controls="collapseProducts">
                     <i class="fas fa-fw fa-box"></i>

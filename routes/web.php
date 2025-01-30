@@ -89,18 +89,18 @@ Route::prefix('sales')->name('sales.')->group(function () {
     Route::get('{sale}/edit', [SalesController::class, 'edit'])->name('edit');
     Route::put('{sale}', [SalesController::class, 'update'])->name('update');
     Route::delete('{sale}', [SalesController::class, 'destroy'])->name('destroy');
-    // Route::get('{sale}/print', [SalesController::class, 'print'])->name('print');
+    Route::get('{sale}/invoice', [SalesController::class, 'createInvoice'])->name('invoice');
 });
 
-Route::prefix('vehicle-assignments')->name('vehicle-assignments.')->group(function () {
-    Route::get('/', [VehicleAssignmentController::class, 'index'])->name('index');
-    Route::get('create/{rawana?}', [VehicleAssignmentController::class, 'create'])->name('create');
-    Route::post('/', [VehicleAssignmentController::class, 'store'])->name('store');
-    Route::get('{assignment}', [VehicleAssignmentController::class, 'show'])->name('show');
-    Route::get('{assignment}/edit', [VehicleAssignmentController::class, 'edit'])->name('edit');
-    Route::put('{assignment}', [VehicleAssignmentController::class, 'update'])->name('update');
-    Route::delete('{assignment}', [VehicleAssignmentController::class, 'destroy'])->name('destroy');
-});
+// Route::prefix('vehicle-assignments')->name('vehicle-assignments.')->group(function () {
+//     Route::get('/', [VehicleAssignmentController::class, 'index'])->name('index');
+//     Route::get('create/{rawana?}', [VehicleAssignmentController::class, 'create'])->name('create');
+//     Route::post('/', [VehicleAssignmentController::class, 'store'])->name('store');
+//     Route::get('{assignment}', [VehicleAssignmentController::class, 'show'])->name('show');
+//     Route::get('{assignment}/edit', [VehicleAssignmentController::class, 'edit'])->name('edit');
+//     Route::put('{assignment}', [VehicleAssignmentController::class, 'update'])->name('update');
+//     Route::delete('{assignment}', [VehicleAssignmentController::class, 'destroy'])->name('destroy');
+// });
 
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');

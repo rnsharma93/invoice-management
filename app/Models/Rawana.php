@@ -10,10 +10,11 @@ class Rawana extends Model
 
     protected $fillable = [
         'date',
-        'rawana_no',
+        'eway_bill_no',
         'vendor_id',
         'customer_id',
         'vehicle_id',
+        'vehicle_rate',
         'rawana_weight',
         'kanta_weight',
     ];

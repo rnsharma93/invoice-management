@@ -27,25 +27,10 @@
             </div>
 
             <div class="form-group">
-                <label for="rawana_no">Rawana No</label>
-                <input type="text" name="rawana_no" id="rawana_no" class="form-control"
-                    value="{{ old('rawana_no', $rawana->rawana_no) }}" required>
-                @error('rawana_no')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="vehicle_id">Vehicle</label>
-                <select name="vehicle_id" id="vehicle_id" class="form-control" required>
-                    <option value="">Select Vehicle</option>
-                    @foreach ($vehicles as $vehicle)
-                        <option value="{{ $vehicle->id }}" {{ old('vehicle_id', $rawana->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
-                            {{ $vehicle->vehicle_number }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('vehicle_id')
+                <label for="eway_bill_no">E-Way Bill No</label>
+                <input type="text" name="eway_bill_no" id="eway_bill_no" class="form-control"
+                    value="{{ old('eway_bill_no', $rawana->eway_bill_no) }}" required>
+                @error('eway_bill_no')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -94,6 +79,30 @@
                 <input type="number" name="kanta_weight" id="kanta_weight" class="form-control"
                     value="{{ old('kanta_weight', $rawana->kanta_weight) }}" required>
                 @error('kanta_weight')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle_id">Vehicle</label>
+                <select name="vehicle_id" id="vehicle_id" class="form-control" required>
+                    <option value="">Select Vehicle</option>
+                    @foreach ($vehicles as $vehicle)
+                        <option value="{{ $vehicle->id }}" {{ old('vehicle_id', $rawana->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
+                            {{ $vehicle->vehicle_number }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('vehicle_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle_rate">Vehicle Rate</label>
+                <input type="number" name="vehicle_rate" id="vehicle_rate" class="form-control"
+                    value="{{ old('vehicle_rate', isset($rawana) ? $rawana->vehicle_rate : '') }}" required>
+                @error('vehicle_rate')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

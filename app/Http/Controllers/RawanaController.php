@@ -33,10 +33,11 @@ class RawanaController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'rawana_no' => 'required|string|unique:rawanas,rawana_no',
+            'eway_bill_no' => 'required|string|unique:rawanas,eway_bill_no',
             'vendor_id' => 'required|exists:vendors,id',
             'customer_id' => 'required|exists:customers,id',
             'vehicle_id' => 'required|exists:vehicles,id',
+            'vehicle_rate' => 'nullable|numeric',
             'rawana_weight' => 'required|numeric',
             'kanta_weight' => 'required|numeric',
             'products' => 'required|array',
@@ -45,10 +46,11 @@ class RawanaController extends Controller
 
         $rawana = Rawana::create([
             'date' => $request->date,
-            'rawana_no' => $request->rawana_no,
+            'eway_bill_no' => $request->eway_bill_no,
             'vendor_id' => $request->vendor_id,
             'customer_id' => $request->customer_id,
             'vehicle_id' => $request->vehicle_id,
+            'vehicle_rate' => $request->vehicle_rate,
             'rawana_weight' => $request->rawana_weight,
             'kanta_weight' => $request->kanta_weight,
         ]);
@@ -87,10 +89,11 @@ class RawanaController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'rawana_no' => 'required|string|unique:rawanas,rawana_no,' . $id,
+            'eway_bill_no' => 'required|string|unique:rawanas,eway_bill_no,' . $id,
             'vendor_id' => 'required|exists:vendors,id',
             'customer_id' => 'required|exists:customers,id',
             'vehicle_id' => 'required|exists:vehicles,id',
+            'vehicle_rate' => 'nullable|numeric',
             'rawana_weight' => 'required|numeric',
             'kanta_weight' => 'required|numeric',
             'products' => 'required|array',
@@ -102,10 +105,11 @@ class RawanaController extends Controller
         // Update rawana details
         $rawana->update([
             'date' => $request->date,
-            'rawana_no' => $request->rawana_no,
+            'eway_bill_no' => $request->eway_bill_no,
             'vendor_id' => $request->vendor_id,
             'customer_id' => $request->customer_id,
             'vehicle_id' => $request->vehicle_id,
+            'vehicle_rate' => $request->vehicle_rate,
             'rawana_weight' => $request->rawana_weight,
             'kanta_weight' => $request->kanta_weight,
         ]);
