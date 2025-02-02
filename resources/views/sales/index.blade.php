@@ -60,10 +60,7 @@
                                     <td>{{ number_format($tax_amount, 2) }}</td>
                                     <td>
                                         <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Create Invoice">
-                                            <i class="fas fa-file-invoice"></i>
-                                        </a>
-                                        <a href="{{ route('sales.download', $sale->id) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Download Invoice">
-                                            <i class="fas fa-download"></i>
+                                            <i class="fas fa-file-download"></i>
                                         </a>
                                         <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Sale">
                                             <i class="fas fa-eye"></i>

@@ -138,6 +138,60 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
+                {{ __('Transaction Management') }}
+            </div>
+
+            <!-- Transactions Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTransactions"
+                    aria-expanded="true" aria-controls="collapseTransactions">
+                    <i class="fas fa-fw fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <div id="collapseTransactions" class="collapse" aria-labelledby="headingTransactions"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!-- Payment In Submenu -->
+                        <a class="collapse-item" href="#" data-toggle="collapse"
+                            data-target="#collapsePaymentIn" aria-expanded="false" aria-controls="collapsePaymentIn">
+                            <span>Payment In</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                        <div id="collapsePaymentIn" class="collapse" aria-labelledby="headingPaymentIn"
+                            data-parent="#collapseTransactions">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item"
+                                    href="{{ route('transactions.create', ['type' => 'in']) }}">Add Payment In</a>
+                                <a class="collapse-item"
+                                    href="{{ route('transactions.index', ['type' => 'in']) }}">List Payment In</a>
+                            </div>
+                        </div>
+
+                        <!-- Payment Out Submenu -->
+                        <a class="collapse-item" href="#" data-toggle="collapse"
+                            data-target="#collapsePaymentOut" aria-expanded="false"
+                            aria-controls="collapsePaymentOut">
+                            <span>Payment Out</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                        <div id="collapsePaymentOut" class="collapse" aria-labelledby="headingPaymentOut"
+                            data-parent="#collapseTransactions">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item"
+                                    href="{{ route('transactions.create', ['type' => 'out']) }}">Add Payment Out</a>
+                                <a class="collapse-item"
+                                    href="{{ route('transactions.index', ['type' => 'out']) }}">List Payment Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
                 {{ __('User Management') }}
             </div>
 
@@ -603,22 +657,35 @@
         });
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable({
-            paging: true,
-            searching: true,
-            ordering: true,
-            lengthMenu: [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            pageLength: 10,
-            responsive: true,
-            scrollX: true
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                pageLength: 10,
+                responsive: true,
+                scrollX: true
+            });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.collapse-item[data-toggle="collapse"]').click(function () {
+                let icon = $(this).find('i');
+                if (icon.hasClass('fa-chevron-down')) {
+                    icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                } else {
+                    icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                }
+            });
+        });
+    </script>
 
 </body>
 

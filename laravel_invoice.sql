@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 30, 2025 at 02:08 PM
+-- Generation Time: Feb 02, 2025 at 12:29 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.2.0
 
@@ -220,7 +220,15 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   PRIMARY KEY (`id`),
   KEY `rawana_id` (`rawana_id`),
   KEY `vehicle_id` (`vehicle_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `date`, `rawana_id`, `vehicle_id`, `rawana_weight`, `kanta_weight`, `rate`, `total`, `remark`, `photo`, `created_at`, `updated_at`) VALUES
+(11, '2025-02-02', 19, 5, '100.00', '100.00', '100.00', '10000.00', 'sddsds', NULL, '2025-02-02 03:07:17', '2025-02-02 03:07:17'),
+(12, '2025-02-02', 19, 5, '100.00', '100.00', '100.00', '10000.00', NULL, NULL, '2025-02-02 03:30:49', '2025-02-02 03:30:49');
 
 -- --------------------------------------------------------
 
@@ -429,6 +437,48 @@ INSERT INTO `taxes` (`id`, `name`, `rate`, `cgst_rate`, `sgst_rate`, `created_at
 (2, '12%', '12.00', '6.00', '6.00', '2025-01-16 08:43:07', '2025-01-16 08:43:07'),
 (6, '5%', '5.00', '2.50', '2.50', '2025-01-16 09:21:57', '2025-01-16 09:21:57'),
 (7, 'No Tax', '0.00', '0.00', '0.00', '2025-01-17 01:26:28', '2025-01-17 01:26:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `method` varchar(255) NOT NULL,
+  `reference` varchar(255) DEFAULT NULL,
+  `remark` text,
+  `customer_id` bigint UNSIGNED DEFAULT NULL,
+  `vendor_id` bigint UNSIGNED DEFAULT NULL,
+  `vehicle_id` bigint UNSIGNED DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_customer_id` (`customer_id`),
+  KEY `idx_vendor_id` (`vendor_id`),
+  KEY `idx_vehicle_id` (`vehicle_id`),
+  KEY `idx_transaction_type` (`type`(250)),
+  KEY `idx_status` (`status`(250))
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `date`, `amount`, `type`, `method`, `reference`, `remark`, `customer_id`, `vendor_id`, `vehicle_id`, `status`, `created_at`, `updated_at`) VALUES
+(17, '2025-02-02', '200.00', 'out', 'cash', NULL, NULL, NULL, NULL, 5, 'completed', '2025-02-02 03:24:23', '2025-02-02 04:22:52'),
+(16, '2025-02-02', '100.00', 'out', 'cash', NULL, NULL, NULL, 2, NULL, 'completed', '2025-02-02 03:20:18', '2025-02-02 03:20:18'),
+(13, '2025-02-02', '100.00', 'in', 'cash', NULL, NULL, 36, NULL, NULL, 'completed', '2025-02-02 02:50:00', '2025-02-02 02:50:00'),
+(14, '2025-02-02', '100.00', 'in', 'cash', NULL, NULL, 36, NULL, NULL, 'completed', '2025-02-02 03:01:38', '2025-02-02 03:01:38'),
+(18, '2025-02-02', '100.00', 'out', 'cash', NULL, NULL, NULL, NULL, 5, 'completed', '2025-02-02 03:25:03', '2025-02-02 03:25:03'),
+(19, '2025-02-02', '100.00', 'out', 'bank_transfer', NULL, NULL, NULL, NULL, 5, 'completed', '2025-02-02 03:27:32', '2025-02-02 03:27:32'),
+(20, '2025-02-02', '100.00', 'out', 'cash', NULL, NULL, NULL, NULL, 5, 'completed', '2025-02-02 03:37:24', '2025-02-02 03:37:24');
 
 -- --------------------------------------------------------
 

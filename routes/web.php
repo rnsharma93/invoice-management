@@ -10,7 +10,8 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RawanaController;
 use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\SalesController;
-use App\Http\Controllers\VehicleAssignmentController;
+use App\Http\Controllers\TransactionsController;
+// use App\Http\Controllers\VehicleAssignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,32 @@ Route::prefix('sales')->name('sales.')->group(function () {
     Route::delete('{sale}', [SalesController::class, 'destroy'])->name('destroy');
     Route::get('{sale}/invoice', [SalesController::class, 'createInvoice'])->name('invoice');
 });
+
+Route::prefix('transactions')->name('transactions.')->group(function () {
+    Route::get('/', [TransactionsController::class, 'index'])->name('index');
+    Route::get('in', [TransactionsController::class, 'index'])->name('in.index');
+    Route::get('out', [TransactionsController::class, 'index'])->name('out.index');
+    Route::get('create/{type}', [TransactionsController::class, 'create'])->name('create'); // Requires type parameter
+    Route::post('/', [TransactionsController::class, 'store'])->name('store');
+    Route::get('{transaction}', [TransactionsController::class, 'show'])->name('show');
+    Route::get('{transaction}/edit', [TransactionsController::class, 'edit'])->name('edit');
+    Route::put('{transaction}', [TransactionsController::class, 'update'])->name('update');
+    Route::delete('{transaction}', [TransactionsController::class, 'destroy'])->name('destroy');
+
+    Route::get('customer-total/{customerId}', [TransactionsController::class, 'getCustomerTotal'])->name('customer.total');
+    Route::get('vendor-total/{vendorId}', [TransactionsController::class, 'getVendorTotal'])->name('vendor.total');
+    Route::get('vehicle-total/{vehicleId}', [TransactionsController::class, 'getVehicleTotal'])->name('vehicle.total');
+});
+
+// Route::prefix('transactions')->name('transactions.')->group(function () {
+//     Route::get('/', [TransactionController::class, 'index'])->name('index'); // List all transactions
+//     Route::get('create', [TransactionController::class, 'create'])->name('create'); // Show create form
+//     Route::post('/', [TransactionController::class, 'store'])->name('store'); // Store a new transaction
+//     Route::get('{transaction}', [TransactionController::class, 'show'])->name('show'); // Show transaction details
+//     Route::get('{transaction}/edit', [TransactionController::class, 'edit'])->name('edit'); // Show edit form
+//     Route::put('{transaction}', [TransactionController::class, 'update'])->name('update'); // Update a transaction
+//     Route::delete('{transaction}', [TransactionController::class, 'destroy'])->name('destroy'); // Delete a transaction
+// });
 
 // Route::prefix('vehicle-assignments')->name('vehicle-assignments.')->group(function () {
 //     Route::get('/', [VehicleAssignmentController::class, 'index'])->name('index');
