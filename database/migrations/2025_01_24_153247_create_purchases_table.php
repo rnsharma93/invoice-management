@@ -19,12 +19,14 @@ return new class extends Migration
             $table->decimal('kanta_weight', 8, 2)->nullable();
             $table->decimal('rate', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
+            $table->unsignedBigInteger('vendor_id')->nullable();
             $table->unsignedBigInteger('vehicle_id')->nullable();
             $table->text('remark')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('rawana_id')->references('id')->on('rawanas')->onDelete('set null');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('set null');
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('set null');
         });
     }

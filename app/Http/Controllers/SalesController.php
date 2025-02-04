@@ -57,6 +57,8 @@ class SalesController extends Controller
             $file->storeAs('photos/sales', $photoName, 'public');
         }
 
+        $rawana = Rawana::find($request->input('rawana_id'));
+
         Sale::create([
             'rawana_id' => $request->input('rawana_id'),
             'date' => $request->input('date'),
@@ -74,6 +76,8 @@ class SalesController extends Controller
             'remark' => $request->input('remark'),
             'photo' => $photoName,
         ]);
+
+        $rawana->update(['status' => 'SALE']);
 
         return redirect()->route('sales.index')->with('success', 'Sale created successfully.');
     }
@@ -107,6 +111,7 @@ class SalesController extends Controller
         ]);
 
         $sale = Sale::findOrFail($id);
+        $rawana = $sale->rawana;
 
         $sale->date = $request->date;
         $sale->customer_id = $request->customer_id;
@@ -133,6 +138,10 @@ class SalesController extends Controller
         }
 
         $sale->save();
+
+        if ($rawana->status !== 'SALE') {
+            $rawana->update(['status' => 'SALE']);
+        }
 
         return redirect()->route('sales.index')->with('success', 'Sale updated successfully.');
     }

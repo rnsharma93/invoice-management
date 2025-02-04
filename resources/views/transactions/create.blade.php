@@ -20,11 +20,9 @@
                 <form action="{{ route('transactions.store') }}" method="POST">
                     @csrf
 
-                    <!-- Hidden input for transaction type -->
                     <input type="hidden" name="type" value="{{ $type }}">
 
                     @if ($type == 'out')
-                        <!-- Radio buttons to select Vendor or Vehicle -->
                         <div class="form-group">
                             <label>Select Type</label>
                             <div>
@@ -41,7 +39,6 @@
                             </div>
                         </div>
 
-                        <!-- Vendor Dropdown -->
                         <div class="form-group" id="vendor_group">
                             <label for="vendor_id">Select Vendor</label>
                             <select name="vendor_id" id="vendor_id" class="form-control">
@@ -52,7 +49,6 @@
                             </select>
                         </div>
 
-                        <!-- Vehicle Dropdown -->
                         <div class="form-group" id="vehicle_group" style="display: none;">
                             <label for="vehicle_id">Select Vehicle</label>
                             <select name="vehicle_id" id="vehicle_id" class="form-control">
@@ -107,14 +103,12 @@
                         </select>
                     </div>
 
-                    <!-- Reference Field -->
                     <div class="form-group">
                         <label for="reference">Reference</label>
                         <input type="text" name="reference" id="reference" class="form-control"
                             value="{{ old('reference') }}" placeholder="Enter reference (optional)">
                     </div>
 
-                    <!-- Remark Field -->
                     <div class="form-group">
                         <label for="remark">Remark</label>
                         <textarea name="remark" id="remark" class="form-control" rows="3" placeholder="Enter remark (optional)">{{ old('remark') }}</textarea>
@@ -126,35 +120,12 @@
             </div>
 
             <!-- Right Section: Transaction Summary -->
-            {{-- <div class="col-md-4">
-                <div id="total-section" class="mt-4">
-                    <h4>Transaction Summary</h4>
-                    <div class="form-group">
-                        <label for="total-amount">Total Amount:</label>
-                        <input type="text" id="total-amount" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="paid-amount">Paid Amount:</label>
-                        <input type="text" id="paid-amount" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="paying-amount">Paying Amount:</label>
-                        <input type="number" id="paying-amount" class="form-control" step="0.01" value="0.00" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="remaining-amount">Remaining Amount:</label>
-                        <input type="text" id="remaining-amount" class="form-control" readonly>
-                    </div>
-                </div>
-            </div> --}}
-            <!-- Right Section: Transaction Summary -->
             <div class="col-md-4" style="margin-top: 28px;">
                 <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0 text-center">Transaction Summary</h4>
                     </div>
                     <div class="card-body">
-                        <!-- Total Amount -->
                         <div class="mb-3">
                             <label for="total-amount" class="form-label fw-bold">Total Amount:</label>
                             <div class="input-group">
@@ -163,7 +134,6 @@
                             </div>
                         </div>
 
-                        <!-- Paid Amount -->
                         <div class="mb-3">
                             <label for="paid-amount" class="form-label fw-bold">Paid Amount:</label>
                             <div class="input-group">
@@ -172,7 +142,6 @@
                             </div>
                         </div>
 
-                        <!-- Paying Amount -->
                         <div class="mb-3">
                             <label for="paying-amount" class="form-label fw-bold">Paying Amount:</label>
                             <div class="input-group">
@@ -182,7 +151,6 @@
                             </div>
                         </div>
 
-                        <!-- Remaining Amount -->
                         <div class="mb-3">
                             <label for="remaining-amount" class="form-label fw-bold">Remaining Amount:</label>
                             <div class="input-group">
@@ -191,7 +159,6 @@
                             </div>
                         </div>
 
-                        <!-- Summary Note -->
                         <div class="alert alert-info mb-0">
                             <small>
                                 <i class="fas fa-info-circle"></i>

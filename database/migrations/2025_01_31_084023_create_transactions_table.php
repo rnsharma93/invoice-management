@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->decimal('amount', 10, 2);
-            $table->enum('type', ['in', 'out', 'refund', 'adjustment']);
-            $table->enum('method', ['cash', 'bank_transfer', 'cheque', 'credit_card', 'other']);
+            $table->string('type', 20);
+            $table->string('method', 20);
             $table->string('reference')->nullable();
             $table->text('remark')->nullable();
             $table->foreignId('customer_id')->nullable()->constrained('customers')->nullOnDelete();
             $table->foreignId('vendor_id')->nullable()->constrained('vendors')->nullOnDelete();
             $table->foreignId('vehicle_id')->nullable()->constrained('vehicles')->nullOnDelete();
-            $table->enum('status', ['pending', 'completed', 'failed', 'canceled'])->default('pending');
+            $table->string('status', 20)->default('pending');
             $table->timestamps();
         });
     }

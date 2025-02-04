@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('vehicle_rate', 10, 2)->nullable();
             $table->decimal('rawana_weight', 8, 2)->nullable();
             $table->decimal('kanta_weight', 8, 2)->nullable();
+            $table->enum('status', ['PENDING', 'PURCHASED', 'SALE'])->default('pending');
             $table->timestamps();
 
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('set null');

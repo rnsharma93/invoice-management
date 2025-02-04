@@ -15,6 +15,7 @@ class Purchase extends Model
         'kanta_weight',
         'rate',
         'total',
+        'vendor_id',
         'vehicle_id',
         'remark',
         'photo',
@@ -25,6 +26,11 @@ class Purchase extends Model
     public function rawana()
     {
         return $this->belongsTo(Rawana::class, 'rawana_id');
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 
     public function vehicle()

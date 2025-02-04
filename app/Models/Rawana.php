@@ -40,4 +40,14 @@ class Rawana extends Model
     {
         return $this->hasMany(RawanaItem::class);
     }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'rawana_id');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'rawana_id');
+    }
 }

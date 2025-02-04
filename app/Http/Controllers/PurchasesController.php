@@ -23,9 +23,8 @@ class PurchasesController extends Controller
         $rawana_id = $request->query('rawana_id');
         $rawana = Rawana::find($rawana_id);
         $customers = Customer::all();
-        $vendors = Vendor::all();
         $vehicles = Vehicle::all();
-        return view('purchases.create', compact('rawana', 'vehicles'));
+        return view('purchases.create', compact('rawana', 'vehicles',));
     }
 
     public function store(Request $request)
@@ -37,7 +36,8 @@ class PurchasesController extends Controller
             'kanta_weight' => 'required|numeric|min:0',
             'rate' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
-            'vehicle_id' => 'required|exists:vehicles,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
             'remark' => 'nullable|string|max:1000',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -50,6 +50,10 @@ class PurchasesController extends Controller
             $file->storeAs('photos/purchases', $photoName, 'public');
         }
 
+        $rawana = Rawana::find($request->input('rawana_id'));
+
+        $vendor_id = $rawana->vendor_id;
+
         Purchase::create([
             'rawana_id' => $request->input('rawana_id'),
             'date' => $request->input('date'),
@@ -57,19 +61,24 @@ class PurchasesController extends Controller
             'kanta_weight' => $request->input('kanta_weight'),
             'rate' => $request->input('rate'),
             'total' => $request->input('total'),
+            'vendor_id' => $vendor_id,
             'vehicle_id' => $request->input('vehicle_id'),
             'remark' => $request->input('remark'),
             'photo' => $photoName,
         ]);
+
+        $rawana->update(['status' => 'PURCHASED']);
 
         return redirect()->route('purchases.index')->with('success', 'Purchase created successfully.');
     }
 
     public function edit($id)
     {
-        $purchase = Purchase::findOrFail($id);
+        $purchase = Purchase::with('rawana')->findOrFail($id);
+        $rawana = $purchase->rawana;
         $vehicles = Vehicle::all();
-        return view('purchases.edit', compact('purchase', 'vehicles'));
+
+        return view('purchases.edit', compact('purchase', 'rawana', 'vehicles',));
     }
 
     public function update(Request $request, $id)
@@ -80,18 +89,23 @@ class PurchasesController extends Controller
             'kanta_weight' => 'required|numeric',
             'rate' => 'required|numeric',
             'total' => 'nullable|numeric',
-            'vehicle_id' => 'required|exists:vehicles,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
             'remark' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $purchase = Purchase::findOrFail($id);
 
+        $rawana = $purchase->rawana;
+        $vendor_id = $rawana->vendor_id;
+
         $purchase->date = $request->date;
         $purchase->rawana_weight = $request->rawana_weight;
         $purchase->kanta_weight = $request->kanta_weight;
         $purchase->rate = $request->rate;
         $purchase->total = $request->total;
+        $purchase->vendor_id = $vendor_id;
         $purchase->vehicle_id = $request->vehicle_id;
         $purchase->remark = $request->remark;
 
@@ -106,6 +120,10 @@ class PurchasesController extends Controller
         }
 
         $purchase->save();
+
+        if ($rawana->status !== 'PURCHASED') {
+            $rawana->update(['status' => 'PURCHASED']);
+        }
 
         return redirect()->route('purchases.index')->with('success', 'Purchase updated successfully.');
     }

@@ -115,7 +115,7 @@ class RawanaController extends Controller
         ]);
 
         // Update rawana items
-        $rawana->rawanaItems()->delete(); // Clear old items
+        $rawana->rawanaItems()->delete();
         foreach ($request->products as $productId) {
             $product = Product::findOrFail($productId);
 
@@ -144,9 +144,16 @@ class RawanaController extends Controller
         return redirect()->route('rawanas.index')->with('success', 'Rawana deleted successfully!');
     }
 
+    // public function show($id)
+    // {
+    //     $rawana = Rawana::findOrFail($id);
+
+    //     return view('rawanas.show', compact('rawana'));
+    // }
+
     public function show($id)
     {
-        $rawana = Rawana::findOrFail($id);
+        $rawana = Rawana::with(['vendor', 'customer', 'vehicle', 'purchases', 'sales'])->findOrFail($id);
 
         return view('rawanas.show', compact('rawana'));
     }
