@@ -84,18 +84,20 @@ class TransactionsController extends Controller
 
     public function edit(Transaction $transaction)
     {
-        if ($transaction->type == 'out') {
+        $type = $transaction->type; // Get transaction type
+
+        if ($type == 'out') {
             $vendors = Vendor::all();
             $vehicles = Vehicle::all();
-            return view('transactions.edit', compact('transaction', 'vendors', 'vehicles'));
+            return view('transactions.edit', compact('transaction', 'vendors', 'vehicles', 'type'));
         }
 
-        if ($transaction->type == 'in') {
+        if ($type == 'in') {
             $customers = Customer::all();
-            return view('transactions.edit', compact('transaction', 'customers'));
+            return view('transactions.edit', compact('transaction', 'customers', 'type'));
         }
 
-        return view('transactions.edit', compact('transaction'));
+        return view('transactions.edit', compact('transaction', 'type'));
     }
 
     public function update(Request $request, Transaction $transaction)

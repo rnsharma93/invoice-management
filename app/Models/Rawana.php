@@ -17,6 +17,7 @@ class Rawana extends Model
         'vehicle_rate',
         'rawana_weight',
         'kanta_weight',
+        'status'
     ];
 
     public $timestamps = true;

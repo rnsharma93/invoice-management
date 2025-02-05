@@ -100,9 +100,8 @@
         </div>
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
 
-        <!-- Content Column -->
         <div class="col-lg-6 mb-4">
 
             <!-- Project Card Example -->
@@ -216,5 +215,5 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
 @endsection

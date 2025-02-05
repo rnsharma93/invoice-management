@@ -62,6 +62,7 @@ Route::prefix('vendors')->name('vendors.')->group(function () {
 
 Route::prefix('rawanas')->name('rawanas.')->group(function () {
     Route::get('/', [RawanaController::class, 'index'])->name('index');
+    Route::get('pending-purchases', [RawanaController::class, 'listPendingurchases'])->name('pending-purchases');
     Route::get('create', [RawanaController::class, 'create'])->name('create');
     Route::post('/', [RawanaController::class, 'store'])->name('store');
     Route::get('{rawana}', [RawanaController::class, 'show'])->name('show');

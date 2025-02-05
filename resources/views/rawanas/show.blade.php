@@ -63,20 +63,20 @@
                 <!-- Vendor -->
                 <div class="row mb-3">
                     <div class="col-md-2">
-                        <strong>Vendor:</strong>
+                        <strong>Vendor(Purchase Party):</strong>
                     </div>
                     <div class="col-md-10">
-                        <p class="text-muted">{{ $rawana->vendor->name ?? 'N/A' }}</p>
+                        <p class="text-muted">{{ strtoupper($rawana->vendor->name) ?? 'N/A' }}</p>
                     </div>
                 </div>
 
                 <!-- Customer -->
                 <div class="row mb-3">
                     <div class="col-md-2">
-                        <strong>Customer:</strong>
+                        <strong>Customer(Sale Party):</strong>
                     </div>
                     <div class="col-md-10">
-                        <p class="text-muted">{{ $rawana->customer->name ?? 'N/A' }}</p>
+                        <p class="text-muted">{{ strtoupper($rawana->customer->name) ?? 'N/A' }}</p>
                     </div>
                 </div>
 
@@ -147,7 +147,7 @@
                                 <strong>Remark:</strong>
                             </div>
                             <div class="col-md-10">
-                                <p class="text-muted">{{ $purchase->remark }}</p>
+                                <p class="text-muted">{{ strtoupper($purchase->remark) }}</p>
                             </div>
                         </div>
                         <hr>
@@ -184,10 +184,42 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
+                                <strong>Customer(Sale Party):</strong>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-muted">{{ strtoupper($rawana->customer->name) ?? 'N/A' }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <strong>Kanta Weight:</strong>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-muted">{{ $sale->kanta_weight }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
                                 <strong>Rate:</strong>
                             </div>
                             <div class="col-md-10">
                                 <p class="text-muted">{{ $sale->rate }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <strong>Reverse Charges:</strong>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-muted">{{ strtoupper($sale->reverse_charges) }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <strong>Transaport Name:</strong>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-muted">{{ strtoupper($sale->transport_name) }}</p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -200,10 +232,26 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
+                                <strong>Date of Supply:</strong>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-muted">{{ \Carbon\Carbon::parse($sale->date_of_supply)->format('d-m-Y') }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <strong>Place of Supply:</strong>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-muted">{{ strtoupper($sale->place_of_supply) }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
                                 <strong>Remark:</strong>
                             </div>
                             <div class="col-md-10">
-                                <p class="text-muted">{{ $sale->remark }}</p>
+                                <p class="text-muted">{{ strtoupper($sale->remark) }}</p>
                             </div>
                         </div>
                         <hr>

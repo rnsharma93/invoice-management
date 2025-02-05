@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('transactions.index') }}">Transactions</a>
+                <a href="{{ route('transactions.index', ['type' => $type]) }}">Transactions</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Add New Transaction ({{ ucfirst($type) }})</li>
         </ol>
@@ -115,7 +115,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Create Transaction</button>
-                    <a href="{{ route('transactions.index') }}" class="btn btn-secondary">Cancel</a>
+                    <a href="{{ route('transactions.index', ['type' => $type]) }}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
 

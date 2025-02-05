@@ -19,6 +19,20 @@ class RawanaController extends Controller
         return view('rawanas.index', compact('rawanas'));
     }
 
+
+    public function listPendingurchases()
+    {
+        $rawanas = Rawana::with([
+            'vendor:id,name',
+            'customer:id,name',
+            'vehicle:id,vehicle_number'
+        ])
+        ->whereIn('status', ['PENDING', 'PURCHASED']) // Fetch both pending and purchased
+        ->get(['id', 'date', 'eway_bill_no', 'vendor_id', 'customer_id', 'vehicle_id', 'vehicle_rate', 'rawana_weight', 'kanta_weight', 'status']);
+
+        return view('rawanas.pending-purchases', compact('rawanas'));
+    }
+
     public function create()
     {
         $products = Product::orderBy('name', 'asc')->get();

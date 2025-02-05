@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('transactions.index') }}">Transactions</a>
+                <a href="{{ route('transactions.index', ['type' => $type ?? 'all']) }}">Transactions</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{ ucfirst($type) }} Transactions</li>
         </ol>

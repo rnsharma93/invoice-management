@@ -69,9 +69,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('rawanas.create') }}">Add Rawana</a>
-                        <!-- Corrected route -->
                         <a class="collapse-item" href="{{ route('rawanas.index') }}">List Rawanas</a>
-                        <!-- Corrected route -->
+                        <a class="collapse-item" href="{{ route('rawanas.pending-purchases') }}">Pending Purchases List</a>
                     </div>
                 </div>
             </li>

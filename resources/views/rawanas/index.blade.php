@@ -55,28 +55,26 @@
                                     <td>{{ ucwords(strtolower($rawana->status)) }}</td>
                                     <td>
                                         @if ($rawana->status == 'PENDING')
-                                            <a href="{{ route('purchases.create', ['rawana_id' => $rawana->id]) }}"
-                                                class="btn btn-success" data-toggle="tooltip" data-placement="top"
-                                                title="Create Purchase">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                        <a href="{{ route('purchases.create', ['rawana_id' => $rawana->id]) }}"
+                                            class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Create Purchase">
+                                            Create Purchase
+                                        </a>
                                         @else
-                                            <button class="btn btn-success" disabled>
-                                                <i class="fas fa-shopping-cart"></i>
+                                            <button class="btn btn-success btn-sm" disabled>
+                                                Create Purchase
                                             </button>
                                         @endif
                                         {{-- <a href="{{ route('vehicle-assignments.create', ['rawana_id' => $rawana->id]) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Assign Vehicle">
                                             <i class="fas fa-truck"></i>
                                         </a> --}}
                                         @if ($rawana->status == 'PENDING' || $rawana->status == 'PURCHASED')
-                                            <a href="{{ route('sales.create', ['rawana_id' => $rawana->id]) }}"
-                                                class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                                title="Create Sale">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                        <a href="{{ route('sales.create', ['rawana_id' => $rawana->id]) }}"
+                                            class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Create Sale">
+                                            Create Sale
+                                        </a>
                                         @else
-                                            <button class="btn btn-danger" disabled>
-                                                <i class="fas fa-shopping-cart"></i>
+                                            <button class="btn btn-danger btn-sm" disabled>
+                                                Create Sale
                                             </button>
                                         @endif
                                     </td>

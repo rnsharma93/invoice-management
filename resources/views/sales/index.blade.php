@@ -59,12 +59,12 @@
                                     <td>{{ number_format($tax_rate, 2) }}</td>
                                     <td>{{ number_format($tax_amount, 2) }}</td>
                                     <td>
-                                        <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Create Invoice">
-                                            <i class="fas fa-file-download"></i>
-                                        </a>
-                                        <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Sale">
+                                        <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Create Invoice">
                                             <i class="fas fa-eye"></i>
                                         </a>
+                                        {{-- <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Sale">
+                                            <i class="fas fa-eye"></i>
+                                        </a> --}}
                                         <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Sale">
                                             <i class="fas fa-edit"></i>
                                         </a>
