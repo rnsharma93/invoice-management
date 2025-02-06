@@ -47,19 +47,21 @@
                                     <td>{{ number_format($product->tax_amount, 2) }}</td>
                                     <td>{{ number_format($product->sale_price, 2) }}</td>
                                     <td>
-                                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Product">
+                                        <div class="d-flex">
+                                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="View Product">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Product">
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Edit Product">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Product" onclick="return confirm('Are you sure you want to delete this product?');">
+                                            <button type="submit" class="btn btn-danger" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Delete Product" onclick="return confirm('Are you sure you want to delete this product?');">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

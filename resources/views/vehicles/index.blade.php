@@ -45,19 +45,21 @@
                                     <td>{{ $vehicle->driver_name }}</td>
                                     <td>{{ $vehicle->driver_phone }}</td>
                                     <td>
-                                        <a href="{{ route('vehicles.show', $vehicle->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Vehicle">
+                                        <div class="d-flex">
+                                        <a href="{{ route('vehicles.show', $vehicle->id) }}" class="btn btn-primary" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="View Vehicle">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Vehicle">
+                                        <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="btn btn-warning" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Edit Vehicle">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Vehicle" onclick="return confirm('Are you sure you want to delete this vehicle?');">
+                                            <button type="submit" class="btn btn-danger" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Delete Vehicle" onclick="return confirm('Are you sure you want to delete this vehicle?');">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

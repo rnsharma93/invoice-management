@@ -59,22 +59,31 @@
                                     <td>{{ number_format($tax_rate, 2) }}</td>
                                     <td>{{ number_format($tax_amount, 2) }}</td>
                                     <td>
-                                        <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Create Invoice">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        {{-- <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Sale">
+                                        <div class="d-flex">
+                                            <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-primary"
+                                                style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
+                                                title="Create Invoice">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            {{-- <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Sale">
                                             <i class="fas fa-eye"></i>
                                         </a> --}}
-                                        <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Sale">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('sales.destroy', $sale->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Sale" onclick="return confirm('Are you sure you want to delete this sale?');">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                            <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-warning"
+                                                style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
+                                                title="Edit Sale">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('sales.destroy', $sale->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" style="margin-right: 3px;"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete Sale"
+                                                    onclick="return confirm('Are you sure you want to delete this sale?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

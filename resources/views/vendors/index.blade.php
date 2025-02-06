@@ -47,19 +47,26 @@
                                     <td>{{ $vendor->state->name }}</td>
                                     <td>{{ $vendor->gst_number }}</td>
                                     <td>
-                                        <a href="{{ route('vendors.show', $vendor->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Vendor">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('vendors.edit', $vendor->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Vendor">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('vendors.destroy', $vendor->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Vendor" onclick="return confirm('Are you sure you want to delete this vendor?');">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex">
+                                            <a href="{{ route('vendors.show', $vendor->id) }}" class="btn btn-primary"
+                                                style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="View Vendor">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('vendors.edit', $vendor->id) }}" class="btn btn-warning"
+                                                style="margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Edit Vendor">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('vendors.destroy', $vendor->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" style="margin-right: 3px;" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete Vendor"
+                                                    onclick="return confirm('Are you sure you want to delete this vendor?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

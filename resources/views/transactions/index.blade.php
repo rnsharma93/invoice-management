@@ -83,31 +83,28 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <!-- View Button -->
-                                        <a href="{{ route('transactions.show', $transaction->id) }}"
-                                            class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                            title="View Transaction">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-
-                                        <!-- Edit Button -->
-                                        <a href="{{ route('transactions.edit', $transaction->id) }}"
-                                            class="btn btn-warning" data-toggle="tooltip" data-placement="top"
-                                            title="Edit Transaction">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip"
-                                                data-placement="top" title="Delete Transaction"
-                                                onclick="return confirm('Are you sure you want to delete this transaction?');">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex">
+                                            <a href="{{ route('transactions.show', $transaction->id) }}"
+                                                class="btn btn-primary" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
+                                                title="View Transaction">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('transactions.edit', $transaction->id) }}"
+                                                class="btn btn-warning" style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
+                                                title="Edit Transaction">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('transactions.destroy', $transaction->id) }}"
+                                                method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" style="margin-right: 3px;" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete Transaction"
+                                                    onclick="return confirm('Are you sure you want to delete this transaction?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

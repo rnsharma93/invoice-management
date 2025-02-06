@@ -48,19 +48,28 @@
                                     <td>{{ number_format($purchase->rate, 2) }}</td>
                                     <td>{{ number_format($purchase->total, 2) }}</td>
                                     <td>
-                                        <a href="{{ route('purchases.show', $purchase->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Purchase">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Purchase">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('purchases.destroy', $purchase->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Purchase" onclick="return confirm('Are you sure you want to delete this purchase?');">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex">
+                                            <a href="{{ route('purchases.show', $purchase->id) }}" class="btn btn-primary"
+                                                style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
+                                                title="View Purchase">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-warning"
+                                                style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
+                                                title="Edit Purchase">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('purchases.destroy', $purchase->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"style="margin-right: 3px;"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete Purchase"
+                                                    onclick="return confirm('Are you sure you want to delete this purchase?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                 </tr>
                             @endforeach
                         </tbody>
