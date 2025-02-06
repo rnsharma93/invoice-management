@@ -27,6 +27,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Manage</th>
                                 <th>Date</th>
                                 <th>E-Way No</th>
                                 <th>Vehicle</th>
@@ -36,7 +37,6 @@
                                 <th>Weight Rawana</th>
                                 <th>Weight Kanta</th>
                                 <th>Status</th>
-                                <th>Manage</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -44,15 +44,6 @@
                             @foreach ($rawanas as $index => $rawana)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($rawana->date)->format('d-m-Y') }}</td>
-                                    <td>{{ $rawana->eway_bill_no }}</td>
-                                    <td>{{ $rawana->vehicle->vehicle_number ?? 'N/A' }}</td>
-                                    <td>{{ $rawana->vehicle_rate }}</td>
-                                    <td>{{ $rawana->vendor->name ?? 'N/A' }}</td>
-                                    <td>{{ $rawana->customer->name ?? 'N/A' }}</td>
-                                    <td>{{ $rawana->rawana_weight }}</td>
-                                    <td>{{ $rawana->kanta_weight }}</td>
-                                    <td>{{ ucwords(strtolower($rawana->status)) }}</td>
                                     <td>
                                         <div class="d-flex">
                                             @if ($rawana->status == 'PENDING')
@@ -82,6 +73,15 @@
                                             @endif
                                         </div>
                                     </td>
+                                    <td>{{ \Carbon\Carbon::parse($rawana->date)->format('d-m-Y') }}</td>
+                                    <td>{{ $rawana->eway_bill_no }}</td>
+                                    <td>{{ $rawana->vehicle->vehicle_number ?? 'N/A' }}</td>
+                                    <td>{{ $rawana->vehicle_rate }}</td>
+                                    <td>{{ $rawana->vendor->name ?? 'N/A' }}</td>
+                                    <td>{{ $rawana->customer->name ?? 'N/A' }}</td>
+                                    <td>{{ $rawana->rawana_weight }}</td>
+                                    <td>{{ $rawana->kanta_weight }}</td>
+                                    <td>{{ ucwords(strtolower($rawana->status)) }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('rawanas.show', $rawana->id) }}" class="btn btn-primary"
