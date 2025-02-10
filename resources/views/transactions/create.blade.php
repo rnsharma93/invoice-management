@@ -93,7 +93,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control" required>
                             <option value="pending">Pending</option>
@@ -101,7 +101,7 @@
                             <option value="failed">Failed</option>
                             <option value="canceled">Canceled</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label for="reference">Reference</label>
@@ -199,7 +199,7 @@
             }
         });
     </script>
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             let vendorSelect = document.getElementById('vendor_id');
             let vehicleSelect = document.getElementById('vehicle_id');
@@ -306,6 +306,12 @@
                 });
             }
         });
-    </script>
+
+
+    </script> --}}
 
 @endsection
+
+@push('scripts')
+@include('transactions.js')
+@endpush

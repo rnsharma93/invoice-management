@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('vehicle_id')->nullable();
             $table->decimal('vehicle_rate', 10, 2)->nullable();
-            $table->decimal('rawana_weight', 8, 2)->nullable();
-            $table->decimal('kanta_weight', 8, 2)->nullable();
+            $table->decimal('rawana_weight', 15, 5)->nullable();
+            $table->decimal('kanta_weight', 15, 5)->nullable();
             $table->enum('status', ['PENDING', 'PURCHASED', 'SALE'])->default('pending');
             $table->timestamps();
 

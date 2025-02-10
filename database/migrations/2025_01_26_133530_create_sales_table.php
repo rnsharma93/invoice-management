@@ -17,14 +17,14 @@ return new class extends Migration
             $table->date('date');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('vendor_id');
-            $table->float('rawana_weight');
-            $table->float('kanta_weight');
+            $table->decimal('rawana_weight', 15, 5)->nullable();
+            $table->decimal('kanta_weight', 15, 5)->nullable();
             $table->decimal('rate', 10, 2);
             $table->decimal('total', 10, 2);
             $table->unsignedBigInteger('vehicle_id');
             $table->enum('reverse_charges', ['Y', 'N'])->nullable();
             $table->string('transport_name')->nullable();
-            $table->date('date_of_supply');
+            $table->date('date_of_supply')->nullable();
             $table->string('place_of_supply')->nullable();
             $table->string('remark')->nullable();
             $table->string('photo')->nullable();

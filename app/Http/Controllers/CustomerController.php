@@ -95,4 +95,15 @@ class CustomerController extends Controller
         $customer = Customer::findOrFail($id);
         return view('customers.show', compact('customer'));
     }
+
+    public function search(Request $request)
+    {
+        $term = $request->input('term');
+
+        $customers = Customer::where('name', 'like', '%' . $term . '%')
+            ->select('id', 'name as text')
+            ->get();
+
+        return response()->json($customers);
+    }
 }

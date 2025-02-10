@@ -40,7 +40,8 @@
                 <select name="vendor_id" id="vendor_id" class="form-control select2" required>
                     <option value="">Select Vendor</option>
                     @foreach ($vendors as $vendor)
-                        <option value="{{ $vendor->id }}" {{ old('vendor_id', $rawana->vendor_id) == $vendor->id ? 'selected' : '' }}>
+                        <option value="{{ $vendor->id }}"
+                            {{ old('vendor_id', $rawana->vendor_id) == $vendor->id ? 'selected' : '' }}>
                             {{ $vendor->name }}
                         </option>
                     @endforeach
@@ -55,7 +56,8 @@
                 <select name="customer_id" id="customer_id" class="form-control select2" required>
                     <option value="">Select Customer</option>
                     @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}" {{ old('customer_id', $rawana->customer_id) == $customer->id ? 'selected' : '' }}>
+                        <option value="{{ $customer->id }}"
+                            {{ old('customer_id', $rawana->customer_id) == $customer->id ? 'selected' : '' }}>
                             {{ $customer->name }}
                         </option>
                     @endforeach
@@ -67,7 +69,7 @@
 
             <div class="form-group">
                 <label for="rawana_weight">Rawana Weight</label>
-                <input type="number" name="rawana_weight" id="rawana_weight" class="form-control"
+                <input type="number" name="rawana_weight" id="rawana_weight" class="form-control" step="0.00001"
                     value="{{ old('rawana_weight', $rawana->rawana_weight) }}" required>
                 @error('rawana_weight')
                     <div class="text-danger">{{ $message }}</div>
@@ -76,7 +78,7 @@
 
             <div class="form-group">
                 <label for="kanta_weight">Weight Kanta</label>
-                <input type="number" name="kanta_weight" id="kanta_weight" class="form-control"
+                <input type="number" name="kanta_weight" id="kanta_weight" class="form-control" step="0.00001"
                     value="{{ old('kanta_weight', $rawana->kanta_weight) }}" required>
                 @error('kanta_weight')
                     <div class="text-danger">{{ $message }}</div>
@@ -88,7 +90,8 @@
                 <select name="vehicle_id" id="vehicle_id" class="form-control" required>
                     <option value="">Select Vehicle</option>
                     @foreach ($vehicles as $vehicle)
-                        <option value="{{ $vehicle->id }}" {{ old('vehicle_id', $rawana->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
+                        <option value="{{ $vehicle->id }}"
+                            {{ old('vehicle_id', $rawana->vehicle_id) == $vehicle->id ? 'selected' : '' }}>
                             {{ $vehicle->vehicle_number }}
                         </option>
                     @endforeach

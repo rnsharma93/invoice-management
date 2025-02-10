@@ -45,7 +45,7 @@
                                 <th>Amount</th>
                                 <th>Type</th>
                                 <th>Method</th>
-                                <th>Status</th>
+                                <th class="d-none">Status</th>
                                 <th>Customer</th>
                                 <th>Vendor</th>
                                 <th>Vehicle</th>
@@ -60,7 +60,7 @@
                                     <td>{{ number_format($transaction->amount, 2) }}</td>
                                     <td>{{ ucfirst($transaction->type) }}</td>
                                     <td>{{ ucfirst(str_replace('_', ' ', $transaction->method)) }}</td>
-                                    <td>{{ ucfirst($transaction->status) }}</td>
+                                    <td class="d-none">{{ ucfirst($transaction->status) }}</td>
                                     <td>
                                         @if ($transaction->customer)
                                             {{ $transaction->customer->name }}

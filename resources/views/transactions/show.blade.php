@@ -22,7 +22,7 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-2"><strong>Date:</strong></div>
-                    <div class="col-md-10"><p class="text-muted">{{ \Carbon\Carbon::parse($transaction->date)->format('d-m-Y') }}</p></div>
+                    <div class="col-md-10"><p class="text-muted">{{ \Carbon\Carbon::parse($purchase->date)->format('d-m-Y') }}</p></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-2"><strong>Amount:</strong></div>
@@ -36,7 +36,7 @@
                     <div class="col-md-2"><strong>Method:</strong></div>
                     <div class="col-md-10"><p class="text-muted">{{ ucfirst($transaction->method) }}</p></div>
                 </div>
-                <div class="row mb-3">
+                {{-- <div class="row mb-3">
                     <div class="col-md-2"><strong>Status:</strong></div>
                     <div class="col-md-10">
                         <p class="text-muted">
@@ -45,7 +45,7 @@
                             </span>
                         </p>
                     </div>
-                </div>
+                </div> --}}
                 @if($transaction->customer)
                     <div class="row mb-3">
                         <div class="col-md-2"><strong>Customer:</strong></div>

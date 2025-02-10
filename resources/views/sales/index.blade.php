@@ -62,7 +62,7 @@
                                         <div class="d-flex">
                                             <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-primary"
                                                 style="margin-right: 3px;" data-toggle="tooltip" data-placement="top"
-                                                title="Create Invoice">
+                                                title="Create Invoice" target="_blank">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             {{-- <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Sale">

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->nullable()->constrained('customers')->nullOnDelete();
             $table->foreignId('vendor_id')->nullable()->constrained('vendors')->nullOnDelete();
             $table->foreignId('vehicle_id')->nullable()->constrained('vehicles')->nullOnDelete();
-            $table->string('status', 20)->default('pending');
+            // $table->string('status', 20)->default('PENDING');
             $table->timestamps();
         });
     }

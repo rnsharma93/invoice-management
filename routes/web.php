@@ -25,7 +25,7 @@ use App\Http\Controllers\TransactionsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/app', function () {
@@ -41,6 +41,7 @@ Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
 
 Route::prefix('customers')->name('customers.')->group(function () {
+    Route::get('search', [CustomerController::class, 'search'])->name('search');
     Route::get('/', [CustomerController::class, 'index'])->name('index');
     Route::get('create', [CustomerController::class, 'create'])->name('create');
     Route::post('/', [CustomerController::class, 'store'])->name('store');
@@ -51,6 +52,7 @@ Route::prefix('customers')->name('customers.')->group(function () {
 });
 
 Route::prefix('vendors')->name('vendors.')->group(function () {
+    Route::get('search', [VendorController::class, 'search'])->name('search');
     Route::get('/', [VendorController::class, 'index'])->name('index');
     Route::get('create', [VendorController::class, 'create'])->name('create');
     Route::post('/', [VendorController::class, 'store'])->name('store');
@@ -119,6 +121,7 @@ Route::prefix('transactions')->name('transactions.')->group(function () {
 // });
 
 Route::prefix('products')->name('products.')->group(function () {
+    Route::get('search', [ProductController::class, 'search'])->name('search');
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('create', [ProductController::class, 'create'])->name('create');
     Route::post('/', [ProductController::class, 'store'])->name('store');

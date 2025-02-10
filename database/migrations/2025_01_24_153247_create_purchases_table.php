@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('rawana_id')->nullable();
             $table->date('date');
-            $table->decimal('rawana_weight', 8, 2)->nullable();
-            $table->decimal('kanta_weight', 8, 2)->nullable();
+            $table->decimal('rawana_weight', 15, 5)->nullable();
+            $table->decimal('kanta_weight', 15, 5)->nullable();
             $table->decimal('rate', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
             $table->unsignedBigInteger('vendor_id')->nullable();

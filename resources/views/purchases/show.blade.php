@@ -28,17 +28,17 @@
                     <div class="col-md-2"><strong>Date:</strong></div>
                     <div class="col-md-10"><p class="text-muted">{{ \Carbon\Carbon::parse($purchase->date)->format('d-m-Y') }}</p></div>
                 </div>
-                <div class="row mb-3">
+                {{-- <div class="row mb-3">
                     <div class="col-md-2"><strong>Rawana Weight:</strong></div>
                     <div class="col-md-10"><p class="text-muted">{{ $purchase->rawana_weight }} kg</p></div>
-                </div>
+                </div> --}}
                 <div class="row mb-3">
                     <div class="col-md-2"><strong>Kanta Weight:</strong></div>
-                    <div class="col-md-10"><p class="text-muted">{{ $purchase->kanta_weight }} kg</p></div>
+                    <div class="col-md-10"><p class="text-muted">{{ $purchase->kanta_weight }}</p></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-2"><strong>Rate:</strong></div>
-                    <div class="col-md-10"><p class="text-muted">{{ $purchase->rate }} per kg</p></div>
+                    <div class="col-md-10"><p class="text-muted">{{ $purchase->rate }}</p></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-2"><strong>Total:</strong></div>

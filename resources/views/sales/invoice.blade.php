@@ -10,8 +10,8 @@
                     Wad No. 03, Village - Khepdiya Kheda, Post - Jorawpura, Teh. Mandal, Dist. Bhilwara (Raj.) 311402
                 </p>
                 <p class="mb-0 text-muted">
-                    <strong>Mobile:</strong> +91 80009 84086 | <strong>GSTIN:</strong> 08ABCDE1234F1Z5 | <strong>PAN
-                        No:</strong> ABCDE1234F
+                    <strong>Mobile:</strong> +91 80009 84086 | <strong>GSTIN:</strong> 08DLUPK3381N1Z6 | <strong>PAN
+                        No:</strong> DLUPK3381N
                 </p>
             </div>
 
@@ -41,7 +41,8 @@
                     <div class="col-md-6 d-flex justify-content-end align-items-start">
                         <div class="text-left">
                             <h3 class="fw-bold">Invoice Details:</h3>
-                            {{-- <p><strong>Invoice No:</strong> {{ $sale->id }}</p> --}}
+                            <p><strong>Invoice No:</strong> <span id="invoice_no"></span></p>
+                            </p>
                             <p><strong>E-Way Bill No:</strong> {{ strtoupper($sale->rawana->eway_bill_no ?? 'N/A') }}</p>
                             <p><strong>Invoice Date:</strong> {{ \Carbon\Carbon::parse($sale->date)->format('d-m-Y') }}</p>
                             <p><strong>Date of Supply:</strong>
@@ -227,102 +228,124 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        function numberToWords(num) {
-            if (num === 0) return "Zero Rupees Only";
+        document.addEventListener('DOMContentLoaded', function() {
 
-            let ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-            let teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-            let tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-            let places = ["", "Thousand", "Lakh", "Crore"];
+            function generateInvoiceNumber(saleId) {
+                let currentYear = new Date().getFullYear();
+                let nextYear = (currentYear + 1).toString().slice(-
+                2);
 
-            function convertLessThanThousand(n) {
-                if (n === 0) return "";
-                if (n < 10) return ones[n] + " ";
-                if (n < 20) return teens[n - 10] + " ";
-                if (n < 100) return tens[Math.floor(n / 10)] + " " + ones[n % 10] + " ";
-                return ones[Math.floor(n / 100)] + " Hundred " + convertLessThanThousand(n % 100);
+                let formattedSaleId = saleId.toString().padStart(2, '0');
+
+                return `${currentYear}-${nextYear}/${formattedSaleId}`;
             }
 
-            function convertToWords(n) {
-                if (n === 0) return "Zero";
+            let saleId = {{ $sale->id }};
 
-                let word = "";
-                let crore = Math.floor(n / 10000000);
-                n %= 10000000;
-                let lakh = Math.floor(n / 100000);
-                n %= 100000;
-                let thousand = Math.floor(n / 1000);
-                n %= 1000;
-                let hundred = n;
-
-                if (crore) word += convertLessThanThousand(crore) + "Crore ";
-                if (lakh) word += convertLessThanThousand(lakh) + "Lakh ";
-                if (thousand) word += convertLessThanThousand(thousand) + "Thousand ";
-                if (hundred) word += convertLessThanThousand(hundred);
-
-                return word.trim() + " Rupees Only";
+            let invoiceElement = document.getElementById("invoice_no");
+            if (invoiceElement) {
+                invoiceElement.textContent = generateInvoiceNumber(saleId);
             }
 
-            return convertToWords(num);
-        }
+            function numberToWords(num) {
+                if (num === 0) return "Zero Rupees Only";
 
-        let totalAmountBeforeTax = parseFloat("{{ $totalAmountBeforeTax }}") || 0;
-        let totalTaxAmount = parseFloat("{{ $totalTaxAmount }}") || 0;
-        let totalAmountAfterTax = totalAmountBeforeTax + totalTaxAmount;
+                let ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+                let teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+                    "Eighteen", "Nineteen"
+                ];
+                let tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty",
+                "Ninety"];
+                let places = ["", "Thousand", "Lakh", "Crore"];
 
-        console.log("Total Amount Before Tax:", totalAmountBeforeTax);
-        console.log("Total Tax Amount:", totalTaxAmount);
-        console.log("Total Amount After Tax:", totalAmountAfterTax);
+                function convertLessThanThousand(n) {
+                    if (n === 0) return "";
+                    if (n < 10) return ones[n] + " ";
+                    if (n < 20) return teens[n - 10] + " ";
+                    if (n < 100) return tens[Math.floor(n / 10)] + " " + ones[n % 10] + " ";
+                    return ones[Math.floor(n / 100)] + " Hundred " + convertLessThanThousand(n % 100);
+                }
 
-        let amountInWords = numberToWords(Math.floor(totalAmountAfterTax));
+                function convertToWords(n) {
+                    if (n === 0) return "Zero";
 
-        let amountCell = document.getElementById("amountInWords");
-        if (amountCell) {
-            amountCell.innerHTML = "<b>" + amountInWords + "</b>";
-        }
+                    let word = "";
+                    let crore = Math.floor(n / 10000000);
+                    n %= 10000000;
+                    let lakh = Math.floor(n / 100000);
+                    n %= 100000;
+                    let thousand = Math.floor(n / 1000);
+                    n %= 1000;
+                    let hundred = n;
 
-        document.querySelectorAll('tbody tr').forEach(row => {
-            const qtyCell = row.querySelector('.qty');
-            const rateCell = row.querySelector('.rate');
-            const amountCell = row.querySelector('.amount');
+                    if (crore) word += convertLessThanThousand(crore) + "Crore ";
+                    if (lakh) word += convertLessThanThousand(lakh) + "Lakh ";
+                    if (thousand) word += convertLessThanThousand(thousand) + "Thousand ";
+                    if (hundred) word += convertLessThanThousand(hundred);
 
-            if (qtyCell && rateCell && amountCell) {
-                const qty = parseFloat(qtyCell.textContent.trim()) || 0;
-                const rate = parseFloat(rateCell.textContent.trim().replace(/,/g, '')) || 0;
-                const amount = qty * rate;
-                amountCell.textContent = amount.toFixed(2);
+                    return word.trim() + " Rupees Only";
+                }
+
+                return convertToWords(num);
             }
+
+            let totalAmountBeforeTax = parseFloat("{{ $totalAmountBeforeTax }}") || 0;
+            let totalTaxAmount = parseFloat("{{ $totalTaxAmount }}") || 0;
+            let totalAmountAfterTax = totalAmountBeforeTax + totalTaxAmount;
+
+            console.log("Total Amount Before Tax:", totalAmountBeforeTax);
+            console.log("Total Tax Amount:", totalTaxAmount);
+            console.log("Total Amount After Tax:", totalAmountAfterTax);
+
+            let amountInWords = numberToWords(Math.floor(totalAmountAfterTax));
+
+            let amountCell = document.getElementById("amountInWords");
+            if (amountCell) {
+                amountCell.innerHTML = "<b>" + amountInWords + "</b>";
+            }
+
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const qtyCell = row.querySelector('.qty');
+                const rateCell = row.querySelector('.rate');
+                const amountCell = row.querySelector('.amount');
+
+                if (qtyCell && rateCell && amountCell) {
+                    const qty = parseFloat(qtyCell.textContent.trim()) || 0;
+                    const rate = parseFloat(rateCell.textContent.trim().replace(/,/g, '')) || 0;
+                    const amount = qty * rate;
+                    amountCell.textContent = amount.toFixed(2);
+                }
+            });
+
+            let totalBaseAmount = 0;
+            let totalTaxAmountCalculated = 0;
+            let totalAmountCalculated = 0;
+
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const amountCell = row.querySelector('.amount');
+                const taxAmountCell = row.querySelector('td:nth-child(9)');
+                const totalAmountCell = row.querySelector('td:nth-child(10)');
+
+                if (amountCell && taxAmountCell && totalAmountCell) {
+                    const amount = parseFloat(amountCell.textContent.trim().replace(/,/g, '')) || 0;
+                    const taxAmount = parseFloat(taxAmountCell.textContent.trim().replace(/,/g, '')) || 0;
+                    const totalAmount = parseFloat(totalAmountCell.textContent.trim().replace(/,/g, '')) ||
+                        0;
+
+                    totalBaseAmount += amount;
+                    totalTaxAmountCalculated += taxAmount;
+                    totalAmountCalculated += totalAmount;
+                }
+            });
+
+            const footerBaseAmount = document.querySelector('tfoot th.amount');
+            const footerTaxAmount = document.querySelector('tfoot th.amount:nth-child(9)');
+            const footerTotalAmount = document.querySelector('tfoot th.amount:nth-child(10)');
+
+            if (footerBaseAmount) footerBaseAmount.textContent = totalBaseAmount.toFixed(2);
+            if (footerTaxAmount) footerTaxAmount.textContent = totalTaxAmountCalculated.toFixed(2);
+            if (footerTotalAmount) footerTotalAmount.textContent = totalAmountCalculated.toFixed(2);
         });
-
-        let totalBaseAmount = 0;
-        let totalTaxAmountCalculated = 0;
-        let totalAmountCalculated = 0;
-
-        document.querySelectorAll('tbody tr').forEach(row => {
-            const amountCell = row.querySelector('.amount');
-            const taxAmountCell = row.querySelector('td:nth-child(9)');
-            const totalAmountCell = row.querySelector('td:nth-child(10)');
-
-            if (amountCell && taxAmountCell && totalAmountCell) {
-                const amount = parseFloat(amountCell.textContent.trim().replace(/,/g, '')) || 0;
-                const taxAmount = parseFloat(taxAmountCell.textContent.trim().replace(/,/g, '')) || 0;
-                const totalAmount = parseFloat(totalAmountCell.textContent.trim().replace(/,/g, '')) || 0;
-
-                totalBaseAmount += amount;
-                totalTaxAmountCalculated += taxAmount;
-                totalAmountCalculated += totalAmount;
-            }
-        });
-
-        const footerBaseAmount = document.querySelector('tfoot th.amount');
-        const footerTaxAmount = document.querySelector('tfoot th.amount:nth-child(9)');
-        const footerTotalAmount = document.querySelector('tfoot th.amount:nth-child(10)');
-
-        if (footerBaseAmount) footerBaseAmount.textContent = totalBaseAmount.toFixed(2);
-        if (footerTaxAmount) footerTaxAmount.textContent = totalTaxAmountCalculated.toFixed(2);
-        if (footerTotalAmount) footerTotalAmount.textContent = totalAmountCalculated.toFixed(2);
-    });
     </script>
 
 @endsection

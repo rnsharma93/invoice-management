@@ -61,14 +61,14 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="rawana_weight">Rawana Weight</label>
                 <input type="hidden" name="rawana_weight" id="rawana_weight" class="form-control"
                     value="{{ old('rawana_weight', $sale->rawana_weight) }}" step="0.01">
                 @error('rawana_weight')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="kanta_weight">Kanta Weight</label>
@@ -115,7 +115,7 @@
 
             <div class="form-group">
                 <label for="reverse_charges">Reverse Charges (Y/N)</label>
-                <select name="reverse_charges" id="reverse_charges" class="form-control" required>
+                <select name="reverse_charges" id="reverse_charges" class="form-control">
                     <option value="Y" {{ old('reverse_charges', $sale->reverse_charges) == 'Y' ? 'selected' : '' }}>Yes</option>
                     <option value="N" {{ old('reverse_charges', $sale->reverse_charges) == 'N' ? 'selected' : '' }}>No</option>
                 </select>
@@ -136,7 +136,7 @@
             <div class="form-group">
                 <label for="date_of_supply">Date of Supply</label>
                 <input type="date" name="date_of_supply" id="date_of_supply" class="form-control"
-                       value="{{ old('date_of_supply', $sale->date_of_supply) }}" required>
+                       value="{{ old('date_of_supply', $sale->date_of_supply) }}">
                 @error('date_of_supply')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

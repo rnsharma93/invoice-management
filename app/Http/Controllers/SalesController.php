@@ -104,7 +104,7 @@ class SalesController extends Controller
             'vehicle_id' => 'required|exists:vehicles,id',
             'reverse_charges' => 'nullable|string|max:1',
             'transport_name' => 'nullable|string|max:255',
-            'date_of_supply' => 'required|date',
+            'date_of_supply' => 'nullable|date',
             'place_of_supply' => 'nullable|string|max:255',
             'remark' => 'nullable|string|max:1000',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

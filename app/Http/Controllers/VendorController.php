@@ -95,4 +95,15 @@ class VendorController extends Controller
 
         return view('vendors.show', compact('vendor'));
     }
+
+    public function search(Request $request)
+    {
+        $term = $request->input('term');
+
+        $vendors = Vendor::where('name', 'like', '%' . $term . '%')
+            ->select('id', 'name as text')
+            ->get();
+
+        return response()->json($vendors);
+    }
 }

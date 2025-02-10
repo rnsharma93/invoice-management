@@ -27,7 +27,7 @@ class RawanaController extends Controller
             'customer:id,name',
             'vehicle:id,vehicle_number'
         ])
-        ->whereIn('status', ['PENDING', 'PURCHASED']) // Fetch both pending and purchased
+        ->whereIn('status', ['PENDING', 'PURCHASED'])
         ->get(['id', 'date', 'eway_bill_no', 'vendor_id', 'customer_id', 'vehicle_id', 'vehicle_rate', 'rawana_weight', 'kanta_weight', 'status']);
 
         return view('rawanas.pending-purchases', compact('rawanas'));
@@ -157,13 +157,6 @@ class RawanaController extends Controller
 
         return redirect()->route('rawanas.index')->with('success', 'Rawana deleted successfully!');
     }
-
-    // public function show($id)
-    // {
-    //     $rawana = Rawana::findOrFail($id);
-
-    //     return view('rawanas.show', compact('rawana'));
-    // }
 
     public function show($id)
     {

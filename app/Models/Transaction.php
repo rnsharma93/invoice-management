@@ -16,7 +16,7 @@ class Transaction extends Model
         'customer_id',
         'vendor_id',
         'vehicle_id',
-        'status',
+        // 'status',
     ];
 
     public $timestamps = true;

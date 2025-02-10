@@ -70,7 +70,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('rawanas.create') }}">Add Rawana</a>
                         <a class="collapse-item" href="{{ route('rawanas.index') }}">List Rawanas</a>
-                        <a class="collapse-item" href="{{ route('rawanas.pending-purchases') }}">Pending Purchases List</a>
+                        <a class="collapse-item" href="{{ route('rawanas.pending-purchases') }}">Pending Purchases
+                            List</a>
                     </div>
                 </div>
             </li>
@@ -501,7 +502,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Maintained by <a href="https://technotwist.in/" target="_blank">Technology Twist</a>. {{ now()->year }}</span>
+                        <span>Maintained by <a href="https://technotwist.in/" target="_blank">Technology Twist</a>.
+                            {{ now()->year }}</span>
                     </div>
                 </div>
             </footer>
@@ -561,8 +563,88 @@
         $(document).ready(function() {
             // Initialize Select2
             $('.select2').select2({
-                placeholder: "Select an option",
                 allowClear: true
+            });
+
+            $('#vendor_id').select2({
+                placeholder: "Select Vendor",
+                allowClear: true,
+                language: {
+                    inputTooShort: function() {
+                        return "Enter at least one character to find a vendor";
+                    }
+                },
+                ajax: {
+                    url: "{{ route('vendors.search') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data,
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+            });
+
+            $('#customer_id').select2({
+                placeholder: "Select Customer",
+                allowClear: true,
+                language: {
+                    inputTooShort: function() {
+                        return "Enter at least one character to find a customer";
+                    }
+                },
+                ajax: {
+                    url: "{{ route('customers.search') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1
+            });
+
+            $('#products').select2({
+                placeholder: "Select Product",
+                allowClear: true,
+                language: {
+                    inputTooShort: function() {
+                        return "Enter at least one character to find a product.";
+                    }
+                },
+                ajax: {
+                    url: "{{ route('products.search') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1
             });
 
             // Add custom CSS for Select2
@@ -671,8 +753,8 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            $('.collapse-item[data-toggle="collapse"]').click(function () {
+        $(document).ready(function() {
+            $('.collapse-item[data-toggle="collapse"]').click(function() {
                 let icon = $(this).find('i');
                 if (icon.hasClass('fa-chevron-down')) {
                     icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
@@ -682,6 +764,8 @@
             });
         });
     </script>
+
+    @stack('scripts')
 
 </body>
 

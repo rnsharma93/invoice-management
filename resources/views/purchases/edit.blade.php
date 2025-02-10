@@ -32,14 +32,14 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="rawana_weight">Rawana Weight</label>
                 <input type="hidden" name="rawana_weight" id="rawana_weight" class="form-control"
                        value="{{ old('rawana_weight', $purchase->rawana_weight) }}" step="0.01" required>
                 @error('rawana_weight')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="kanta_weight">Kanta Weight</label>

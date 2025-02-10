@@ -54,7 +54,7 @@ class TransactionsController extends Controller
             'amount' => 'required|numeric',
             'type' => 'required|in:in,out',
             'method' => 'required|in:cash,bank_transfer,cheque,credit_card,other',
-            'status' => 'required|in:pending,completed,failed,canceled',
+            // 'status' => 'required|in:pending,completed,failed,canceled',
             'customer_id' => 'nullable|exists:customers,id',
             'vendor_id' => 'nullable|exists:vendors,id',
             'vehicle_id' => 'nullable|exists:vehicles,id',
@@ -68,7 +68,7 @@ class TransactionsController extends Controller
             'amount' => $request->amount,
             'type' => $request->type,
             'method' => $request->method,
-            'status' => $request->status,
+            // 'status' => $request->status,
             // 'customer_id' => $request->customer_id,
             // 'vendor_id' => $request->vendor_id,
             // 'vehicle_id' => $request->vehicle_id,
@@ -107,7 +107,7 @@ class TransactionsController extends Controller
             'amount' => 'required|numeric',
             'type' => 'required|in:in,out,refund,adjustment',
             'method' => 'required|in:cash,bank_transfer,cheque,credit_card,other',
-            'status' => 'required|in:pending,completed,failed,canceled',
+            // 'status' => 'required|in:pending,completed,failed,canceled',
             'customer_id' => 'nullable|exists:customers,id',
             'vendor_id' => 'nullable|exists:vendors,id',
             'vehicle_id' => 'nullable|exists:vehicles,id',
@@ -120,7 +120,7 @@ class TransactionsController extends Controller
             'amount' => $request->amount,
             'type' => $request->type,
             'method' => $request->method,
-            'status' => $request->status,
+            // 'status' => $request->status,
             'customer_id' => $request->type === 'in' ? $request->customer_id : null,
             'vendor_id' => $request->type === 'out' && $request->out_type === 'vendor' ? $request->vendor_id : null,
             'vehicle_id' => $request->type === 'out' && $request->out_type === 'vehicle' ? $request->vehicle_id : null,
@@ -153,7 +153,7 @@ class TransactionsController extends Controller
         $totalPaid = \DB::table('transactions')
             ->where('customer_id', $customerId)
             ->where('type', 'in')
-            ->where('status', 'completed')
+            // ->where('status', 'completed')
             ->sum('amount');
 
         return response()->json([
@@ -169,7 +169,7 @@ class TransactionsController extends Controller
         $totalPaid = \DB::table('transactions')
             ->where('vendor_id', $vendorId)
             ->where('type', 'out')
-            ->where('status', 'completed')
+            // ->where('status', 'completed')
             ->sum('amount');
 
         return response()->json([
@@ -185,7 +185,7 @@ class TransactionsController extends Controller
         $totalPaid = \DB::table('transactions')
             ->where('vehicle_id', $vehicleId)
             ->where('type', 'out')
-            ->where('status', 'completed')
+            // ->where('status', 'completed')
             ->sum('amount');
 
         return response()->json([

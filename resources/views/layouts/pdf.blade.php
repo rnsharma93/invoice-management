@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,43 +13,62 @@
         rel="stylesheet">
 
     <style>
-    @media print {
-        @page {
-            size: A4;
-            margin: 20mm;
-        }
+        @media print {
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
 
-        .row {
-            display: flex;
-            flex-wrap: nowrap;
-        }
+            .row {
+                display: flex;
+                flex-wrap: nowrap;
+            }
 
-        .col-md-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
+            .col-md-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
 
-        .mb-4 {
-            margin-bottom: 5mm;
-        }
+            .mb-4 {
+                margin-bottom: 5mm;
+            }
 
-        p {
-            margin: 0;
-            padding: 0;
-            line-height: 1.5;
-            font-size: 12pt;
-        }
+            p {
+                margin: 0;
+                padding: 0;
+                line-height: 1.3;
+                font-size: 10pt;
+            }
 
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 12pt;
-            line-height: 1.5;
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+                line-height: 1.3;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
         }
-    }
+       table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table,th,td {
+            border: 1px solid black;
+        }
     </style>
 </head>
+
 <body>
     @yield('content')
 </body>
-</html>
 
+</html>

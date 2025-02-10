@@ -95,4 +95,15 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('products.show', compact('product'));
     }
+
+    public function search(Request $request)
+    {
+        $term = $request->input('term');
+
+        $products = Product::where('name', 'like', '%' . $term . '%')
+            ->select('id', 'name as text')
+            ->get();
+
+        return response()->json($products);
+    }
 }
