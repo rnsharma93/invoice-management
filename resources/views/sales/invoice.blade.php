@@ -4,20 +4,26 @@
     <div class="container my-5">
         <!-- Invoice Container -->
         <div class="invoice-container bg-white p-4 shadow-sm rounded">
-            <div class="header text-center mb-5">
-                <h1 class="text-primary fw-bold">SANWARIYA MINES AND MINERALS</h1>
+            <div class="header text-start mb-5">
+                <h1 class="fw-bold" style="color: #948fe3 !important;"><strong>SANWARIYA MINES AND MINERALS</strong></h1>
                 <p class="mb-1 text-muted">
-                    Wad No. 03, Village - Khepdiya Kheda, Post - Jorawpura, Teh. Mandal, Dist. Bhilwara (Raj.) 311402
+                    Ward No. 03, Village - Khepdiya Kheda, Post - Jorawpura, Teh. Mandal, Dist. Bhilwara (Raj.) 311402
                 </p>
                 <p class="mb-0 text-muted">
-                    <strong>Mobile:</strong> +91 80009 84086 | <strong>GSTIN:</strong> 08DLUPK3381N1Z6 | <strong>PAN
-                        No:</strong> DLUPK3381N
+                    <strong>Mobile:</strong> +91 80009 84086
+                </p>
+                <p class="mb-0 text-muted">
+                    <strong>GSTIN:</strong> 08DLUPK3381N1Z6
+                </p>
+                <p class="mb-0 text-muted">
+                    <strong>PAN No:</strong> DLUPK3381N
                 </p>
             </div>
 
+
             <hr>
             <div class="mb-4">
-                <h3 class="text-center fw-bold">Sale Invoice</h3>
+                <h3 class="text-center sale-invoice-heading"><strong>Tax Invoice</strong></h3>
             </div>
             <hr>
 
@@ -26,7 +32,7 @@
                 <div class="row">
                     <!-- Customer Details Section on Left -->
                     <div class="col-md-6">
-                        <h3 class="fw-bold">Bill To:</h3>
+                        <h3 class="fw-bold"><strong>Bill To:</strong></h3>
                         <p><strong>Customer Name:</strong> {{ strtoupper(old('party_name', $sale->customer->name ?? '')) }}
                         </p>
                         <p><strong>Address:</strong> {{ strtoupper(old('address', $sale->customer->address ?? '')) }}</p>
@@ -40,7 +46,7 @@
                     <!-- Invoice Details Section Centered on Right -->
                     <div class="col-md-6 d-flex justify-content-end align-items-start">
                         <div class="text-left">
-                            <h3 class="fw-bold">Invoice Details:</h3>
+                            <h3 class="fw-bold"><strong>Invoice Details:</strong></h3>
                             <p><strong>Invoice No:</strong> <span id="invoice_no"></span></p>
                             </p>
                             <p><strong>E-Way Bill No:</strong> {{ strtoupper($sale->rawana->eway_bill_no ?? 'N/A') }}</p>
@@ -182,8 +188,8 @@
 
                         <!-- Display total amount before tax -->
                         <tr>
-                            <th>Total Amount Before Tax</th>
-                            <td>₹{{ number_format($totalAmountBeforeTax, 2) }}</td>
+                            <th style="background-color: #948fe3 !important; color: white !important; border: 1px solid white !important; ">Total Amount Before Tax</th>
+                            <td style="background-color: #948fe3 !important; color: white !important; border: 1px solid white !important; ">₹{{ number_format($totalAmountBeforeTax, 2) }}</td>
                         </tr>
 
                         <!-- Display SGST and CGST rows dynamically -->
@@ -196,19 +202,21 @@
 
                         <!-- Display total tax and final amounts -->
                         <tr>
-                            <th>Total Tax Amount</th>
-                            <td>₹{{ number_format($totalTaxAmount, 2) }}</td>
+                            <th style="background-color: #948fe3 !important; color: white !important; border: 1px solid white !important; ">Total Tax Amount</th>
+                            <td style="background-color: #948fe3 !important; color: white !important; border: 1px solid white !important; ">₹{{ number_format($totalTaxAmount, 2) }}</td>
                         </tr>
                         <tr>
-                            <th>Total Amount After Tax</th>
-                            <td><strong>₹{{ number_format($totalAmountBeforeTax + $totalTaxAmount, 2) }}</strong></td>
+                            <th style="background-color: #948fe3 !important; color: white !important; border: 1px solid white !important; ">Total Amount After Tax</th>
+                            <td style="background-color: #948fe3 !important; color: white !important; border: 1px solid white !important; "><strong>₹{{ number_format($totalAmountBeforeTax + $totalTaxAmount, 2) }}</strong></td>
                         </tr>
                     </table>
                 </div>
             </div>
 
+            <hr>
+
             <!-- Terms Section -->
-            <div class="d-flex justify-content-between border-top pt-4">
+            <div class="d-flex justify-content-between pt-4">
                 <div class="w-70">
                     <p><strong>Terms & Conditions:</strong></p>
                     <p>1. Goods once sold will not be taken back.</p>
