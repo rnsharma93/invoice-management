@@ -12,4 +12,4 @@ yarn-error.log
 
 /.phpunit.cache
 
-storage/logs/laravel.log
+/storage/logs/laravel.log

@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Storage;
 
 class SalesController extends Controller
 {
+    // public function index()
+    // {
+    //     $sales = Sale::with('rawana', 'customer', 'vendor', 'vehicle')->get();
+    //     return view('sales.index', compact('sales'));
+    // }
+
     public function index()
     {
-        $sales = Sale::with('rawana', 'customer', 'vendor', 'vehicle')->get();
+        $sales = Sale::with('rawana.rawanaItems', 'customer', 'vendor', 'vehicle')->get();
         return view('sales.index', compact('sales'));
     }
 
@@ -183,5 +189,4 @@ class SalesController extends Controller
 
         return view('sales.invoice', compact('sale', 'customers', 'vendors', 'vehicles'));
     }
-
 }
